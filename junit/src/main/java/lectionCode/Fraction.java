@@ -6,7 +6,7 @@ public class Fraction {
     Integer num;
     Integer den;
 
-    //Test1
+    //Test
     public Integer getNum() {
         return num;
     }
