@@ -1,2 +1,2 @@
 # GC_test_automation
-test
+test2
