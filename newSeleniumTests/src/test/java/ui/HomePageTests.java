@@ -35,7 +35,7 @@ class HomePageTests {
 
         assertEquals("Hands-On Selenium WebDriver with Java", actualTitle);
     }
-
+//
     @Test
     void openWebFormTest() {
         String webFormUrl = "web-form.html";
