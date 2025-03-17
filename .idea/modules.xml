@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/junit.iml" filepath="$PROJECT_DIR$/junit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/junit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/junit.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/junit.test.iml" filepath="$PROJECT_DIR$/.idea/modules/junit.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/newSeleniumTests.iml" filepath="$PROJECT_DIR$/newSeleniumTests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/newSeleniumTests.main.iml" filepath="$PROJECT_DIR$/.idea/modules/newSeleniumTests.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/newSeleniumTests.test.iml" filepath="$PROJECT_DIR$/.idea/modules/newSeleniumTests.test.iml" />
+    </modules>
+  </component>
+</project>
