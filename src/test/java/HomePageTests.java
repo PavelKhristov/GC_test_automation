@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HomePageTests {
@@ -40,7 +42,7 @@ public class HomePageTests {
     @DisplayName("Проверка открытия Navigation")
     @Test
     void navigationTest (){
-        openLinkInMainPageByXPath("//h5[text() = 'Chapter 3. WebDriver Fundamentals']/../a[contains(@href, 'navigation1')]", "navigation1.html", "Navigation example");
+        openLinkInMainPageByXPath("//h5[@class = 'card-title' and text()='Chapter 3. WebDriver Fundamentals']/following-sibling::a[contains(@href, 'navigation1')]", "navigation1.html", "Navigation example");
     }
 
     @DisplayName("Проверка открытия Dropdown menu")
@@ -96,6 +98,25 @@ public class HomePageTests {
     @Test
     void downloadFilesTest (){
         openLinkInMainPageByXPath("//h5[text() = 'Chapter 9. Third-Party Integrations']/../a[contains(@href, 'download')]", "download.html", "Download files");
+    }
+
+    @DisplayName("Проверка открытия всех ссылок")
+    @Test
+    void openAllLinksTest (){
+        int qtyLinks = 0;
+        List<WebElement> chapters = driver.findElements(By.cssSelector("h5.card-title"));
+        for (WebElement chapter : chapters){
+//            System.out.println(chapter.getText());
+            List<WebElement> links = chapter.findElements(By.xpath("./../a"));
+            qtyLinks += links.size();
+            for (WebElement link : links){
+//                System.out.println(link.getText());
+                link.click();
+                driver.navigate().back();
+            }
+        }
+        assertEquals(6, chapters.size());
+        assertEquals(27, qtyLinks);
     }
 
     private void openLinkInMainPageByXPath(String link, String url, String title) {
