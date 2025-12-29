@@ -2,5 +2,10 @@
 
 Бранчи:
 1. 1-simple-UI-Tests:
-    - Проверяется открытие головной страницы и открытие некоторых страницы в каждом из Chapter
-    - Проверяется нахождение элементов на странице WebForm
+    - Сделаны простые тесты
+      - HomePageTests - Проверяется открытие головной страницы и открытие некоторых страницы в каждом из Chapter
+      - WebFormPageTests
+      - NaviationPageTests
+      - DropdownMenuPageTests
+      - MouseOverPageTests
+      - DragAndDropPageTests

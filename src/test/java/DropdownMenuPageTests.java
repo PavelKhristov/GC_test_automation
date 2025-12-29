@@ -8,7 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DropdownMenuPageTests {
 
@@ -36,18 +37,49 @@ public class DropdownMenuPageTests {
         Thread.sleep(1000);
 
         WebElement dropdown1 = driver.findElement(By.id("my-dropdown-1"));
+        WebElement dropdownMenu1 = dropdown1.findElement(By.xpath("../ul"));
         WebElement dropdown2 = driver.findElement(By.id("my-dropdown-2"));
+        WebElement dropdownMenu2 = dropdown2.findElement(By.xpath("../ul"));
         WebElement dropdown3 = driver.findElement(By.id("my-dropdown-3"));
+        WebElement dropdownMenu3 = dropdown3.findElement(By.xpath("../ul"));
 
-
+        assertEquals("Use left-click here", dropdown1.getText());
+        assertEquals("dropdown-menu", dropdownMenu1.getDomAttribute("class"));
         actions.click(dropdown1).perform();
+        assertEquals("dropdown-menu show", dropdownMenu1.getDomAttribute("class"));
+
+        assertEquals("Action", dropdownMenu1.findElement(By.xpath("(//a[@class='dropdown-item'])[1]")).getText());
+        assertEquals("Another action", dropdownMenu1.findElement(By.xpath("(//a[@class='dropdown-item'])[2]")).getText());
+        assertEquals("Something else here", dropdownMenu1.findElement(By.xpath("(//a[@class='dropdown-item'])[3]")).getText());
+        assertEquals("Separated link", dropdownMenu1.findElement(By.xpath("(//a[@class='dropdown-item'])[4]")).getText());
         Thread.sleep(2000);
 
+
+
+        assertEquals("Use right-click here", dropdown2.getText());
+        assertEquals(null, dropdownMenu2.getDomAttribute("style"));
         actions.contextClick(dropdown2).perform();
+        assertEquals("display: block;", dropdownMenu2.getDomAttribute("style"));
+
+        assertEquals("Action", dropdown2.findElement(By.xpath("(//a[@class='dropdown-item'])[1]")).getText());
+        assertEquals("Another action", dropdown2.findElement(By.xpath("(//a[@class='dropdown-item'])[2]")).getText());
+        assertEquals("Something else here", dropdown2.findElement(By.xpath("(//a[@class='dropdown-item'])[3]")).getText());
+        assertEquals("Separated link", dropdown2.findElement(By.xpath("(//a[@class='dropdown-item'])[4]")).getText());
         Thread.sleep(2000);
 
+
+
+
+        assertEquals("Use double-click here", dropdown3.getText());
+        assertEquals(null, dropdownMenu3.getDomAttribute("style"));
         actions.doubleClick(dropdown3).perform();
+        assertEquals("display: block;", dropdownMenu3.getDomAttribute("style"));
+        Thread.sleep(2000);
+
+        assertEquals("Action", dropdown3.findElement(By.xpath("(//a[@class='dropdown-item'])[1]")).getDomProperty("innerText"));
+        assertEquals("Another action", dropdown3.findElement(By.xpath("(//a[@class='dropdown-item'])[2]")).getDomProperty("innerText"));
+        assertEquals("Something else here", dropdown3.findElement(By.xpath("(//a[@class='dropdown-item'])[3]")).getDomProperty("innerText"));
+        assertEquals("Separated link", dropdown3.findElement(By.xpath("(//a[@class='dropdown-item'])[4]")).getDomProperty("innerText"));
         Thread.sleep(2000);
     }
-    // остановился на 1:11:29
 }
