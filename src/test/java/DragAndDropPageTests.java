@@ -2,9 +2,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
@@ -35,11 +33,26 @@ public class DragAndDropPageTests {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Drag and drop']")).click();
         Thread.sleep(1000);
 
-
         WebElement draggable = driver.findElement(By.id("draggable"));
         WebElement droppable = driver.findElement(By.id("target"));
+
+        Rectangle recBefore = draggable.getRect();
+        Point loactionBefore = draggable.getLocation();
+        Dimension sizeBefore = draggable.getSize();;
+        System.out.printf("LoactionBefore: %s\n", loactionBefore);
+        System.out.printf("SizeBefore: %s\n", sizeBefore);
+        System.out.printf("Dimension %s, Height %s, Width %s, Point %s, X: %s, Y: %s\n", recBefore.getDimension(), recBefore.getHeight(), recBefore.getWidth(), recBefore.getPoint(), recBefore.getX(), recBefore.getY());
         actions.dragAndDrop(draggable, droppable).perform();
         Thread.sleep(2000);
+
+        Rectangle recAfter = draggable.getRect();
+        Point loactionAfter = draggable.getLocation();
+        Dimension sizeAfter = draggable.getSize();;
+        System.out.printf("LoactionAfter: %s\n", loactionAfter);
+        System.out.printf("SizeAfter: %s\n", sizeAfter);
+        System.out.printf("Dimension %s, Height %s, Width %s, Point %s, X: %s, Y: %s\n", recAfter.getDimension(), recAfter.getHeight(), recAfter.getWidth(), recAfter.getPoint(), recAfter.getX(), recAfter.getY());
+
+        assertEquals("(972, 236)", loactionAfter.toString());
         assertEquals("left: 660px; top: 0px;", draggable.getDomAttribute("style"));
     }
 }
