@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DragAndDropPageTests {
 
@@ -42,7 +43,9 @@ public class DragAndDropPageTests {
         System.out.printf("LoactionBefore: %s\n", loactionBefore);
         System.out.printf("SizeBefore: %s\n", sizeBefore);
         System.out.printf("Dimension %s, Height %s, Width %s, Point %s, X: %s, Y: %s\n", recBefore.getDimension(), recBefore.getHeight(), recBefore.getWidth(), recBefore.getPoint(), recBefore.getX(), recBefore.getY());
-        actions.dragAndDrop(draggable, droppable).perform();
+        actions
+                .dragAndDrop(draggable, droppable)
+                .perform();
         Thread.sleep(2000);
 
         Rectangle recAfter = draggable.getRect();
@@ -52,7 +55,14 @@ public class DragAndDropPageTests {
         System.out.printf("SizeAfter: %s\n", sizeAfter);
         System.out.printf("Dimension %s, Height %s, Width %s, Point %s, X: %s, Y: %s\n", recAfter.getDimension(), recAfter.getHeight(), recAfter.getWidth(), recAfter.getPoint(), recAfter.getX(), recAfter.getY());
 
+        Point expectedLocation = droppable.getLocation();
+        System.out.printf("expectedLocation: %s\n", expectedLocation);
+
+        //хардкод ER позиции
         assertEquals("(972, 236)", loactionAfter.toString());
+        //По другому можно сравнить с позицией элемента, куда переносим
+        assertEquals(expectedLocation, loactionAfter);
+        //Проверяем изменение в стиле
         assertEquals("left: 660px; top: 0px;", draggable.getDomAttribute("style"));
     }
 }

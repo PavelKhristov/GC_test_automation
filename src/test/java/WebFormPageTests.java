@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.Select;
 
@@ -8,7 +9,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,13 +21,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class WebFormPageTests {
 
     WebDriver driver;
+    Actions actions;
     private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    private static final Path TXT_FILE_Path = Paths.get("src/test/resources/file.txt");
+
+
 
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
         driver.get(BASE_URL);
         driver.manage().window().maximize();
+        actions = new Actions(driver);
     };
 
     @AfterEach
@@ -58,7 +67,7 @@ public class WebFormPageTests {
         WebElement textInput = driver.findElement(By.xpath("//label[contains(text(), 'Text input')]/input"));
         textInput.sendKeys("text");
         Thread.sleep(1000);
-        assertEquals("text", textInput.getDomProperty("value"));
+        assertEquals("text", textInput.getDomProperty("value"), "Неверный текст!");
         textInput.clear();
         Thread.sleep(1000);
         assertEquals("", textInput.getDomProperty("value"));
@@ -76,12 +85,15 @@ public class WebFormPageTests {
 
     @DisplayName("Тест Text Area")
     @Test
-    void TextAreaTest () throws InterruptedException {
+    void TextAreaTest () throws InterruptedException, IOException {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Web form']")).click();
         WebElement textArea = driver.findElement(By.xpath("//label[normalize-space(text())='Textarea']/textarea"));
-        textArea.sendKeys("text area");
+        String expectedText = Files.readString(TXT_FILE_Path);
+
+        textArea.sendKeys(expectedText);
         Thread.sleep(1000);
-        assertEquals("text area", textArea.getDomProperty("value"));
+        String actualText = textArea.getAttribute("value");
+        assertEquals(expectedText, actualText);
     }
 
     @DisplayName("Тест Disabled input")
@@ -114,7 +126,9 @@ public class WebFormPageTests {
         assertEquals("Readonly input", readonlyInput.getDomAttribute("value"));
 
         boolean isReadOnly = readonlyInput.getAttribute("readonly") != null;
-        assertEquals(isReadOnly, true);
+        assertTrue(isReadOnly);
+        //2й вариант асерта
+        assertEquals(true, isReadOnly);
     }
 
 
@@ -168,9 +182,8 @@ public class WebFormPageTests {
     @DisplayName("Тест File input")
     @Test
     void FileInputTest () throws IOException, InterruptedException {
-        String filePath = "src/test/resources/file.txt";
         // Чтение содержимого файла в виде строки
-        String content = new String(Files.readAllBytes(Paths.get(filePath)));
+        String content = new String(Files.readAllBytes(TXT_FILE_Path));
         // Используйте содержимое файла в вашем коде, например, вывод на экран
         System.out.println("Содержимое файла: " + content);
         // Получаем URL ресурса
@@ -188,6 +201,7 @@ public class WebFormPageTests {
         String selectFile = System.getProperty("user.dir") + "/src/test/resources/file.txt";
         System.out.println("Относительный путь к файлу: " + selectFile);
 
+
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Web form']")).click();
         WebElement fileInput = driver.findElement(By.xpath("//input[@name='my-file']"));
         assertEquals("File input", fileInput.findElement(By.xpath("..")).getText());
@@ -196,6 +210,8 @@ public class WebFormPageTests {
         WebElement form = driver.findElement(By.xpath("//form"));
         form.submit();
         assertThat(driver.getCurrentUrl()).contains("file.txt");
+        Thread.sleep(1000);
+        assertEquals("Form submitted", driver.findElement(By.className("display-6")).getText());
     }
 
     @DisplayName("Тест Checkboxes")
@@ -205,22 +221,16 @@ public class WebFormPageTests {
 
         WebElement checkedCheckbox = driver.findElement(By.xpath("//label[normalize-space(.)='Checked checkbox']/input"));
         WebElement defauleChechbox = driver.findElement(By.xpath("//label[normalize-space(.)='Default checkbox']/input"));
-        boolean checkedCheckboxState1 = checkedCheckbox.getAttribute("checked") != null;
-        boolean defauleChechboxState1 = defauleChechbox.getAttribute("checked") != null;
-        assertEquals(checkedCheckboxState1, true);
-        assertEquals(defauleChechboxState1, false);
+        assertTrue(checkedCheckbox.isSelected());
+        assertFalse(defauleChechbox.isSelected());
         checkedCheckbox.click();
         Thread.sleep(1000);
-        boolean checkedCheckboxState2 = checkedCheckbox.getAttribute("checked") != null;
-        boolean defauleChechboxState2 = defauleChechbox.getAttribute("checked") != null;
-        assertEquals(checkedCheckboxState2, false);
-        assertEquals(defauleChechboxState2, false);
+        assertFalse(checkedCheckbox.isSelected());
+        assertFalse(defauleChechbox.isSelected());
         defauleChechbox.click();
         Thread.sleep(1000);
-        boolean checkedCheckboxState3 = checkedCheckbox.getAttribute("checked") != null;
-        boolean defauleChechboxState3 = defauleChechbox.getAttribute("checked") != null;
-        assertEquals(checkedCheckboxState3, false);
-        assertEquals(defauleChechboxState3, true);
+        assertFalse(checkedCheckbox.isSelected());
+        assertTrue(defauleChechbox.isSelected());
         Thread.sleep(1000);
     }
 
@@ -231,22 +241,16 @@ public class WebFormPageTests {
 
         WebElement checkedRaiobutton = driver.findElement(By.xpath("//label[normalize-space(.)='Checked radio']/input"));
         WebElement defaultRaiobutton = driver.findElement(By.xpath("//label[normalize-space(.)='Default radio']/input"));
-        boolean checkedRaiobuttonState1 = checkedRaiobutton.getAttribute("checked") != null;
-        boolean defaultRaiobuttonState1 = defaultRaiobutton.getAttribute("checked") != null;
-        assertEquals(checkedRaiobuttonState1, true);
-        assertEquals(defaultRaiobuttonState1, false);
+        assertTrue(checkedRaiobutton.isSelected());
+        assertFalse(defaultRaiobutton.isSelected());
         defaultRaiobutton.click();
         Thread.sleep(1000);
-        boolean checkedRaiobuttonState2 = checkedRaiobutton.getAttribute("checked") != null;
-        boolean defaultRaiobuttonState2 = defaultRaiobutton.getAttribute("checked") != null;
-        assertEquals(checkedRaiobuttonState2, false);
-        assertEquals(defaultRaiobuttonState2, true);
+        assertFalse(checkedRaiobutton.isSelected());
+        assertTrue(defaultRaiobutton.isSelected());
         checkedRaiobutton.click();
         Thread.sleep(1000);
-        boolean checkedRaiobuttonState3 = checkedRaiobutton.getAttribute("checked") != null;
-        boolean defaultRaiobuttonState3 = defaultRaiobutton.getAttribute("checked") != null;
-        assertEquals(checkedRaiobuttonState3, true);
-        assertEquals(defaultRaiobuttonState3, false);
+        assertTrue(checkedRaiobutton.isSelected());
+        assertFalse(defaultRaiobutton.isSelected());
         Thread.sleep(1000);
     }
 
@@ -280,26 +284,6 @@ public class WebFormPageTests {
     void ColorPickerTest () throws InterruptedException {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Web form']")).click();
         WebElement colorPicker = driver.findElement(By.xpath("//label[normalize-space(.)='Color picker']/input"));
-
-
-
-//        Вариант с JS
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        String initColor = colorPicker.getAttribute("value");
-        System.out.println("The initial color is " + initColor);
-
-        Color red = new Color(255, 0, 0, 1);
-        String script = String.format("arguments[0].setAttribute('value', '%s');", red.asHex());
-        Thread.sleep(3000);
-        js.executeScript(script, colorPicker);
-
-        String finalColor = colorPicker.getAttribute("value");
-        System.out.println("The final color is " + finalColor);
-        assertThat(finalColor).isNotEqualTo(initColor);
-        assertThat(Color.fromString(finalColor)).isEqualTo(red);
-        Thread.sleep(3000);
-
 //        Вариант с sendkeys
         Thread.sleep(1000);
         colorPicker.sendKeys("#00ff00");
@@ -307,16 +291,57 @@ public class WebFormPageTests {
         assertEquals("#00ff00", colorPicker.getDomProperty("value"));
         Thread.sleep(1000);
 
+//        Вариант с JS
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
+        Color red = new Color(255, 0, 0, 1);
+        Color blue = new Color(0, 0, 255, 1);
+        String script = "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('change'));";
+        Thread.sleep(3000);
+
+        js.executeScript(script, colorPicker, red.asHex());
+        assertEquals("#ff0000", colorPicker.getDomProperty("value"));
+        Thread.sleep(3000);
+        js.executeScript(script, colorPicker, blue.asHex());
+        assertEquals("#0000ff", colorPicker.getDomProperty("value"));
+        Thread.sleep(3000);
     }
 
     @DisplayName("Тест Date Picker")
     @Test
     void DatePickerTest () throws InterruptedException {
+        /*Покрывал не все кейсы, только введение даты в поле вручную и выбор даты через клик по открывающейся форме*/
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Web form']")).click();
         WebElement datePickerInput = driver.findElement(By.xpath("//label[normalize-space(.)='Date picker']/input"));
+
+        //Вариант с выбором через клик следующего дня
         datePickerInput.click();
-        WebElement datePickerCalendar = driver.findElement(By.xpath("//div[@class = 'datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-top']"));;
+        LocalDate newDate = LocalDate.now().plusDays(1);
+        System.out.println("newDate = " + newDate);
+        String xpathClassName = LocalDate.now().getMonth().maxLength() == LocalDate.now().getDayOfMonth() ? "new day" : "day";
+        System.out.println("xpathClassName = " + xpathClassName);
+        WebElement dateToSelect = driver.findElement(By.xpath(String.format("//td[@class='%s' and text()='%s']", xpathClassName, newDate.getDayOfMonth())));
+        dateToSelect.click();
+        assertEquals(newDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")), datePickerInput.getDomProperty("value"));
+        Thread.sleep(1000);
+        datePickerInput.clear();
+
+        //1й вариант с динамически введенной датой
+        String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        System.out.println("currentDate = " + currentDate);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector('input[name=\"my-date\"]').value = '" + currentDate + "';");
+        Thread.sleep(1000);
+        assertEquals(currentDate, datePickerInput.getDomProperty("value"));
+        datePickerInput.clear();
+
+        //2й вариант с захардкоженой датой
+        datePickerInput.sendKeys("01 18 1989");
+        datePickerInput.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+        assertEquals("01/18/1989", datePickerInput.getDomProperty("value"));
+
+
     }
 
     @DisplayName("Тест Example Range")
@@ -326,6 +351,46 @@ public class WebFormPageTests {
         WebElement exampleRange = driver.findElement(By.xpath("//label[normalize-space(.)='Example range']/input"));
         Thread.sleep(1000);
         assertEquals("5", exampleRange.getDomProperty("value"));
+
+        //работа через клавиатуру
+        exampleRange.sendKeys(Keys.ARROW_RIGHT);
+        Thread.sleep(500);
+        assertEquals("6", exampleRange.getDomProperty("value"));
+        actions
+                .sendKeys(Keys.ARROW_LEFT)
+                .pause(500)
+                .sendKeys(Keys.ARROW_LEFT)
+                .perform();
+        Thread.sleep(500);
+        assertEquals("4", exampleRange.getDomProperty("value"));
+
+        //работа через мышь
+        int width = exampleRange.getSize().getWidth();
+        int x = exampleRange.getLocation().getX();
+        int y = exampleRange.getLocation().getY();
+        int i;
+        for (i = 5; i <= 10; i++) {
+            new Actions(driver)
+                    .moveToElement(exampleRange)
+                    .clickAndHold()
+                    .moveToLocation(x + width / 10 * i, y)
+                    .release()
+                    .perform();
+            Thread.sleep(500);
+            assertEquals(String.valueOf(i), exampleRange.getDomProperty("value"));
+        }
+
+        for (i = 9; i >= 0; i--) {
+            new Actions(driver)
+                    .moveToElement(exampleRange)
+                    .clickAndHold()
+                    .moveToLocation(x + width / 10 * i, y)
+                    .release()
+                    .perform();
+            Thread.sleep(500);
+            assertEquals(String.valueOf(i), exampleRange.getDomProperty("value"));
+        }
+
     }
 
 

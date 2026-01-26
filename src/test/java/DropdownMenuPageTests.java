@@ -43,9 +43,12 @@ public class DropdownMenuPageTests {
         WebElement dropdown3 = driver.findElement(By.id("my-dropdown-3"));
         WebElement dropdownMenu3 = dropdown3.findElement(By.xpath("../ul"));
 
+        //1й дропдаун
         assertEquals("Use left-click here", dropdown1.getText());
         assertEquals("dropdown-menu", dropdownMenu1.getDomAttribute("class"));
-        actions.click(dropdown1).perform();
+        actions
+                .click(dropdown1)
+                .perform();
         assertEquals("dropdown-menu show", dropdownMenu1.getDomAttribute("class"));
 
         assertEquals("Action", dropdownMenu1.findElement(By.xpath("(//a[@class='dropdown-item'])[1]")).getText());
@@ -54,11 +57,12 @@ public class DropdownMenuPageTests {
         assertEquals("Separated link", dropdownMenu1.findElement(By.xpath("(//a[@class='dropdown-item'])[4]")).getText());
         Thread.sleep(2000);
 
-
-
+        //2й дропдаун
         assertEquals("Use right-click here", dropdown2.getText());
         assertEquals(null, dropdownMenu2.getDomAttribute("style"));
-        actions.contextClick(dropdown2).perform();
+        actions
+                .contextClick(dropdown2)
+                .perform();
         assertEquals("display: block;", dropdownMenu2.getDomAttribute("style"));
 
         assertEquals("Action", dropdown2.findElement(By.xpath("(//a[@class='dropdown-item'])[1]")).getText());
@@ -67,12 +71,12 @@ public class DropdownMenuPageTests {
         assertEquals("Separated link", dropdown2.findElement(By.xpath("(//a[@class='dropdown-item'])[4]")).getText());
         Thread.sleep(2000);
 
-
-
-
+        //3й дропдаун
         assertEquals("Use double-click here", dropdown3.getText());
         assertEquals(null, dropdownMenu3.getDomAttribute("style"));
-        actions.doubleClick(dropdown3).perform();
+        actions
+                .doubleClick(dropdown3)
+                .perform();
         assertEquals("display: block;", dropdownMenu3.getDomAttribute("style"));
         Thread.sleep(2000);
 
