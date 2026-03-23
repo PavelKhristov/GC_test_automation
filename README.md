@@ -1,6 +1,22 @@
 В данном проекте тестируется сайт https://bonigarcia.dev/selenium-webdriver-java/index.html
 
+Примечание:
+1. Thread.sleep используется намеренно в некоторых тестах для замедления работы, т.к. без него слишком быстро пробегают тесты. 
+
 Бранчи:
 1. 1-simple-UI-Tests:
-    - Проверяется открытие головной страницы и открытие некоторых страницы в каждом из Chapter
-    - Проверяется нахождение элементов на странице WebForm
+    - Сделаны простые тесты
+      - HomePageTests - Проверяется открытие головной страницы и открытие некоторых страницы в каждом из Chapter
+      - WebFormPageTests
+      - NavigationPageTests
+      - DropdownMenuPageTests
+      - MouseOverPageTests
+      - DragAndDropPageTests
+      - LoadingImagesPageTests
+      - InfiniteScrollPageTests
+      - ShadowDOMPageTests
+      - CookiesPageTests
+      - IframesPageTests
+      - DialogBoxesPageTests
+      - WebStoragePageTests
+      - OtherTests - тесты по работе табами и окнами браузера
