@@ -20,3 +20,4 @@
       - DialogBoxesPageTests
       - WebStoragePageTests
       - OtherTests - тесты по работе табами и окнами браузера
+2. 2-Properties:
