@@ -1,3 +1,6 @@
+package ui;
+
+import configs.TestConfig;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,7 +25,8 @@ public class WebFormPageTests {
 
     WebDriver driver;
     Actions actions;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestConfig config = new TestConfig();
+    String baseUrl = config.getBaseUrl();
     private static final Path TXT_FILE_Path = Paths.get("src/test/resources/file.txt");
 
 
@@ -30,7 +34,7 @@ public class WebFormPageTests {
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
         actions = new Actions(driver);
     };

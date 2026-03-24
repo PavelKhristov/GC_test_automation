@@ -1,3 +1,6 @@
+package ui;
+
+import configs.TestConfig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,12 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ShadowDOMPageTests {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestConfig config = new TestConfig();
+    String baseUrl = config.getBaseUrl();
 
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
     };
 

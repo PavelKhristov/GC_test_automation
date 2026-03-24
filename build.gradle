@@ -21,4 +21,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
+    //Пример как еще можно задать проперти:systemProperty "baseUrl", System.getProperty("baseUrl", "https://bonigarcia.dev/selenium-webdriver-java/")
 }
