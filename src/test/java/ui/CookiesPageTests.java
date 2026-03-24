@@ -35,7 +35,7 @@ public class CookiesPageTests {
     @DisplayName("Тест для cookies")
     @Test
     void cookieTest() throws InterruptedException {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/cookies.html");
+        driver.get(baseUrl + "cookies.html");
         WebDriver.Options options = driver.manage();
         Set<Cookie> cookies = options.getCookies();
         assertThat(cookies).hasSize(2);

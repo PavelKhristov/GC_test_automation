@@ -1,5 +1,6 @@
 package ui;
 
+import configs.TestConfig;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -17,7 +18,8 @@ public class NaviationPageTests {
     //убрал Actions, для реализации разных способов
     //Actions actions;
 
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestConfig config = new TestConfig();
+    String baseUrl = config.getBaseUrl();
     private static final String firstPageText =
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     private static final String middlePageText =
@@ -28,7 +30,7 @@ public class NaviationPageTests {
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
         //actions = new Actions(driver);
     };
@@ -44,7 +46,7 @@ public class NaviationPageTests {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Navigation']")).click();
 
         assertEquals(firstPageText, driver.findElement(By.className("lead")).getText());
-        assertEquals("https://bonigarcia.dev/selenium-webdriver-java/navigation1.html", driver.getCurrentUrl());
+        assertEquals(baseUrl + "navigation1.html", driver.getCurrentUrl());
         List<WebElement> buttons = driver.findElements(By.xpath("//li[contains(@class, 'page-item')]"));
         assertEquals(5, buttons.size());
         Assertions.assertTrue(

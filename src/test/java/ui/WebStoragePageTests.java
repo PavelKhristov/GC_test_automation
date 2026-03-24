@@ -1,5 +1,6 @@
 package ui;
 
+import configs.TestConfig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,12 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WebStoragePageTests {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestConfig config = new TestConfig();
+    String baseUrl = config.getBaseUrl();
 
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
     };
 
@@ -32,7 +34,7 @@ public class WebStoragePageTests {
     @DisplayName("Тест WebStorage")
     @Test
     void testWebStorage() {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-storage.html");
+        driver.get(baseUrl + "web-storage.html");
         WebStorage webStorage = (WebStorage) driver;
 
         LocalStorage localStorage = webStorage.getLocalStorage();

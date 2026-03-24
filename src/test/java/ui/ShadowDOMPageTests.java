@@ -31,7 +31,7 @@ public class ShadowDOMPageTests {
     @DisplayName("Тест ShadowDOM")
     @Test
     void testShadowDom() {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/shadow-dom.html");
+        driver.get(baseUrl + "shadow-dom.html");
 
         assertThrows(NoSuchElementException.class, () -> driver.findElement(By.cssSelector("p")));
         WebElement content = driver.findElement(By.id("content"));

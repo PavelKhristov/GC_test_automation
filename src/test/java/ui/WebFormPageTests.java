@@ -60,7 +60,7 @@ public class WebFormPageTests {
         Thread.sleep(2000);
         driver.navigate().back();
         String currentURL = driver.getCurrentUrl();
-        assertEquals("https://bonigarcia.dev/selenium-webdriver-java/web-form.html", currentURL);
+        assertEquals(baseUrl + "web-form.html", currentURL);
 
     }
 

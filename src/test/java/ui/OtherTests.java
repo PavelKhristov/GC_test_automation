@@ -43,11 +43,10 @@ public class OtherTests {
     @DisplayName("Тест открытия новой табы в браузере")
     @Test
     void testNewTab() {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/");
         String initHandle = driver.getWindowHandle();
 
         driver.switchTo().newWindow(WindowType.TAB);
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-form.html");
+        driver.get(baseUrl + "web-form.html");
         assertThat(driver.getWindowHandles()).hasSize(2);
 
         driver.switchTo().window(initHandle);
@@ -58,11 +57,10 @@ public class OtherTests {
     @DisplayName("Тест открытия нового окна в браузере")
     @Test
     void testNewWindow() {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/");
         String initHandle = driver.getWindowHandle();
 
         driver.switchTo().newWindow(WindowType.WINDOW);
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-form.html");
+        driver.get(baseUrl + "web-form.html");
         assertThat(driver.getWindowHandles()).hasSize(2);
 
         driver.switchTo().window(initHandle);
@@ -73,7 +71,6 @@ public class OtherTests {
     @DisplayName("Тест окна браузера")
     @Test
     void WindowTest() {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/");
         WebDriver.Window window = driver.manage().window();
 
         Point initialPosition = window.getPosition();

@@ -39,7 +39,7 @@ public class DialogBoxesPageTests {
     void dialogBoxesTest() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/dialog-boxes.html");
+        driver.get(baseUrl + "dialog-boxes.html");
         driver.findElement(By.id("my-alert")).click();
         wait.until(ExpectedConditions.alertIsPresent());
         Alert alert = driver.switchTo().alert();

@@ -34,7 +34,7 @@ public class IframesPageTests {
     @DisplayName("Тест для iframe")
     @Test
     void iframeTest() throws InterruptedException {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/iframes.html");
+        driver.get(baseUrl + "iframes.html");
         assertThrows(NoSuchElementException.class, () -> driver.findElement(By.className("lead"))); //ошибка при попытке найти элемент внутри iframe
         WebElement iframeElement = driver.findElement(By.id("my-iframe"));
 

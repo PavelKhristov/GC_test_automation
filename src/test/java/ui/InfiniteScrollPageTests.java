@@ -1,5 +1,6 @@
 package ui;
 
+import configs.TestConfig;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +20,13 @@ import java.util.List;
 public class InfiniteScrollPageTests {
     WebDriver driver;
     Actions actions;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestConfig config = new TestConfig();
+    String baseUrl = config.getBaseUrl();
 
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
         actions = new Actions(driver);
     };
@@ -37,7 +39,7 @@ public class InfiniteScrollPageTests {
     @DisplayName("Тест Infinite Scroll via js")
     @Test
     void infiniteScrollTest() throws InterruptedException, IOException {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/infinite-scroll.html");
+        driver.get(baseUrl + "infinite-scroll.html");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -60,7 +62,7 @@ public class InfiniteScrollPageTests {
     @DisplayName("Тест Infinite Scroll vai actions")
     @Test
     void infiniteScrollTest2() throws InterruptedException, IOException {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/infinite-scroll.html");
+        driver.get(baseUrl + "infinite-scroll.html");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         By pLocator = By.tagName("p");
