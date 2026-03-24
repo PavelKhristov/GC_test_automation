@@ -34,13 +34,6 @@ public class TestConfig {
         return field;
     }
 
-//    public String getBaseUrl() {
-//        String baseUrl = properties.getProperty("baseUrl");
-//        baseUrl = System.getProperty("baseUrl", baseUrl);;
-//        assertNotNull(baseUrl, String.format("BaseUrl is not found in %s.properties", env));
-//        System.out.println("Base URL: " + baseUrl);
-//        return baseUrl;
-//    }
 
     private Properties getPropertiesByEnv(String env) {
         Properties testProperties = new Properties();
