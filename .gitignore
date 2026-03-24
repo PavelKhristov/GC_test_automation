@@ -41,3 +41,5 @@ bin/
 # Игнорируем все .properties файлы в ресурсах
 src/test/resources/*.properties
 src/main/resources/*.properties
+# Исключение: разрешаем загружать файл (если нужно)
+!src/test/resources/dev.properties
