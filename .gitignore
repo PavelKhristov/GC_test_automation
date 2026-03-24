@@ -37,3 +37,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# Игнорируем все .properties файлы в ресурсах
+src/test/resources/*.properties
+src/main/resources/*.properties
