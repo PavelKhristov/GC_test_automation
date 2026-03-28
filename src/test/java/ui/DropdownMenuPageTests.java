@@ -1,6 +1,8 @@
 package ui;
 
 import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,8 +20,12 @@ public class DropdownMenuPageTests {
 
     WebDriver driver;
     Actions actions;
-    TestConfig config = new TestConfig();
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
     String baseUrl = config.getBaseUrl();
+    Integer timeoutWeryFast = config.getTimeoutWeryFast();
+    Integer timeoutFast = config.getTimeoutFast();
+    Integer timeoutMedium = config.getTimeoutMedium();
+    Integer timeoutSlow = config.getTimeoutSlow();
 
     @BeforeEach
     void setup(){
@@ -38,7 +44,7 @@ public class DropdownMenuPageTests {
     @Test
     void DropdownMenuTest () throws InterruptedException {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Dropdown menu']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
 
         WebElement dropdown1 = driver.findElement(By.id("my-dropdown-1"));
         WebElement dropdownMenu1 = dropdown1.findElement(By.xpath("../ul"));
@@ -59,7 +65,7 @@ public class DropdownMenuPageTests {
         assertEquals("Another action", dropdownMenu1.findElement(By.xpath("(//a[@class='dropdown-item'])[2]")).getText());
         assertEquals("Something else here", dropdownMenu1.findElement(By.xpath("(//a[@class='dropdown-item'])[3]")).getText());
         assertEquals("Separated link", dropdownMenu1.findElement(By.xpath("(//a[@class='dropdown-item'])[4]")).getText());
-        Thread.sleep(2000);
+        Thread.sleep(timeoutMedium);
 
         //2й дропдаун
         assertEquals("Use right-click here", dropdown2.getText());
@@ -73,7 +79,7 @@ public class DropdownMenuPageTests {
         assertEquals("Another action", dropdown2.findElement(By.xpath("(//a[@class='dropdown-item'])[2]")).getText());
         assertEquals("Something else here", dropdown2.findElement(By.xpath("(//a[@class='dropdown-item'])[3]")).getText());
         assertEquals("Separated link", dropdown2.findElement(By.xpath("(//a[@class='dropdown-item'])[4]")).getText());
-        Thread.sleep(2000);
+        Thread.sleep(timeoutMedium);
 
         //3й дропдаун
         assertEquals("Use double-click here", dropdown3.getText());
@@ -82,12 +88,12 @@ public class DropdownMenuPageTests {
                 .doubleClick(dropdown3)
                 .perform();
         assertEquals("display: block;", dropdownMenu3.getDomAttribute("style"));
-        Thread.sleep(2000);
+        Thread.sleep(timeoutMedium);
 
         assertEquals("Action", dropdown3.findElement(By.xpath("(//a[@class='dropdown-item'])[1]")).getDomProperty("innerText"));
         assertEquals("Another action", dropdown3.findElement(By.xpath("(//a[@class='dropdown-item'])[2]")).getDomProperty("innerText"));
         assertEquals("Something else here", dropdown3.findElement(By.xpath("(//a[@class='dropdown-item'])[3]")).getDomProperty("innerText"));
         assertEquals("Separated link", dropdown3.findElement(By.xpath("(//a[@class='dropdown-item'])[4]")).getDomProperty("innerText"));
-        Thread.sleep(2000);
+        Thread.sleep(timeoutMedium);
     }
 }

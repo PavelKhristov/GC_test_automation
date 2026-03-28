@@ -2,7 +2,6 @@ package configs;
 
 import java.io.IOException;
 import java.util.Properties;
-import static constants.Constants.BASE_URL;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestConfig {
@@ -24,6 +23,22 @@ public class TestConfig {
 
     public String getPassword() {
         return getFieldByName("password");
+    }
+
+    public String getTimeoutWeryFast() {
+        return getFieldByName("timeoutWeryFast");
+    }
+
+    public String getTimeoutFast() {
+        return getFieldByName("timeoutFast");
+    }
+
+    public String getTimeoutMedium() {
+        return getFieldByName("timeoutMedium");
+    }
+
+    public String getTimeoutSlow() {
+        return getFieldByName("timeoutSlow");
     }
 
     private String getFieldByName(String fieldName) {

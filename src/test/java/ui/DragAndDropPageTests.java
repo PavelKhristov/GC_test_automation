@@ -1,6 +1,8 @@
 package ui;
 
 import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,8 +18,12 @@ public class DragAndDropPageTests {
 
     WebDriver driver;
     Actions actions;
-    TestConfig config = new TestConfig();
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
     String baseUrl = config.getBaseUrl();
+    Integer timeoutWeryFast = config.getTimeoutWeryFast();
+    Integer timeoutFast = config.getTimeoutFast();
+    Integer timeoutMedium = config.getTimeoutMedium();
+    Integer timeoutSlow = config.getTimeoutSlow();
 
     @BeforeEach
     void setup(){
@@ -36,7 +42,7 @@ public class DragAndDropPageTests {
     @Test
     void DropdownMenuTest () throws InterruptedException {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Drag and drop']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
 
         WebElement draggable = driver.findElement(By.id("draggable"));
         WebElement droppable = driver.findElement(By.id("target"));
@@ -50,7 +56,7 @@ public class DragAndDropPageTests {
         actions
                 .dragAndDrop(draggable, droppable)
                 .perform();
-        Thread.sleep(2000);
+        Thread.sleep(timeoutMedium);
 
         Rectangle recAfter = draggable.getRect();
         Point loactionAfter = draggable.getLocation();

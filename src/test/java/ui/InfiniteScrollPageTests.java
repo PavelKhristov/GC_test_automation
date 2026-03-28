@@ -1,6 +1,8 @@
 package ui;
 
 import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,8 +22,12 @@ import java.util.List;
 public class InfiniteScrollPageTests {
     WebDriver driver;
     Actions actions;
-    TestConfig config = new TestConfig();
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
     String baseUrl = config.getBaseUrl();
+    Integer timeoutWeryFast = config.getTimeoutWeryFast();
+    Integer timeoutFast = config.getTimeoutFast();
+    Integer timeoutMedium = config.getTimeoutMedium();
+    Integer timeoutSlow = config.getTimeoutSlow();
 
     @BeforeEach
     void setup(){
@@ -54,7 +60,7 @@ public class InfiniteScrollPageTests {
         System.out.println("lastParagraph" + lastParagraph);
         System.out.println("initParagraphsNumber" + initParagraphsNumber);
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(pLocator, initParagraphsNumber));
-        Thread.sleep(3000);
+        Thread.sleep(timeoutSlow);
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File("./image.png"));
     }
@@ -73,7 +79,7 @@ public class InfiniteScrollPageTests {
         actions.scrollToElement(lastParagraph).perform();
 
         wait.until(ExpectedConditions.numberOfElementsToBe(pLocator, initParagraphsNumber));
-        Thread.sleep(3000);
+        Thread.sleep(timeoutSlow);
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File("./image.png"));
     }

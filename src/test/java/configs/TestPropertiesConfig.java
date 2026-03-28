@@ -17,4 +17,16 @@ public interface TestPropertiesConfig extends Config {
 
     @Key("password")
     String getPassword();
+
+    @Key("timeoutWeryFast")
+    Integer getTimeoutWeryFast();
+
+    @Key("timeoutFast")
+    Integer getTimeoutFast();
+
+    @Key("timeoutMedium")
+    Integer getTimeoutMedium();
+
+    @Key("timeoutSlow")
+    Integer getTimeoutSlow();
 }

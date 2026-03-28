@@ -1,6 +1,8 @@
 package ui;
 
 import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,8 +27,13 @@ public class WebFormPageTests {
 
     WebDriver driver;
     Actions actions;
-    TestConfig config = new TestConfig();
+//    TestConfig config = new TestConfig();
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
     String baseUrl = config.getBaseUrl();
+    Integer timeoutWeryFast = config.getTimeoutWeryFast();
+    Integer timeoutFast = config.getTimeoutFast();
+    Integer timeoutMedium = config.getTimeoutMedium();
+    Integer timeoutSlow = config.getTimeoutSlow();
     private static final Path TXT_FILE_Path = Paths.get("src/test/resources/file.txt");
 
 
@@ -55,9 +62,8 @@ public class WebFormPageTests {
     @Test
     void ReturnToIndexTest () throws InterruptedException {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Web form']")).click();
-
         driver.findElement(By.xpath("//a[contains(text(), 'Return to index')]")).click();
-        Thread.sleep(2000);
+        Thread.sleep(timeoutFast);
         driver.navigate().back();
         String currentURL = driver.getCurrentUrl();
         assertEquals(baseUrl + "web-form.html", currentURL);
@@ -70,10 +76,10 @@ public class WebFormPageTests {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Web form']")).click();
         WebElement textInput = driver.findElement(By.xpath("//label[contains(text(), 'Text input')]/input"));
         textInput.sendKeys("text");
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals("text", textInput.getDomProperty("value"), "Неверный текст!");
         textInput.clear();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals("", textInput.getDomProperty("value"));
     }
 
@@ -83,7 +89,7 @@ public class WebFormPageTests {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Web form']")).click();
         WebElement password = driver.findElement(By.xpath("//label[normalize-space(text())='Password']/input"));
         password.sendKeys("pass");
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals("pass", password.getDomProperty("value"));
     }
 
@@ -95,7 +101,7 @@ public class WebFormPageTests {
         String expectedText = Files.readString(TXT_FILE_Path);
 
         textArea.sendKeys(expectedText);
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         String actualText = textArea.getAttribute("value");
         assertEquals(expectedText, actualText);
     }
@@ -126,7 +132,7 @@ public class WebFormPageTests {
         assertEquals("Readonly input", readonlyInput.getDomAttribute("value"));
         //вводим значение и проверяем что значение не изенилось
         readonlyInput.sendKeys("test");
-        Thread.sleep(2000);
+        Thread.sleep(timeoutMedium);
         assertEquals("Readonly input", readonlyInput.getDomAttribute("value"));
 
         boolean isReadOnly = readonlyInput.getAttribute("readonly") != null;
@@ -148,16 +154,16 @@ public class WebFormPageTests {
         assertEquals("Open this select menu", select.getFirstSelectedOption().getText());
         select.selectByVisibleText("One");
         assertEquals("One", select.getFirstSelectedOption().getText());
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         select.selectByValue("2");
         assertEquals("Two", select.getFirstSelectedOption().getText());
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         select.selectByIndex(3);
         assertEquals("Three", select.getFirstSelectedOption().getText());
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         select.selectByVisibleText("Open this select menu");
         assertEquals("Open this select menu", select.getFirstSelectedOption().getText());
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
     }
 
     @DisplayName("Тест Dropdown (datalist)")
@@ -168,7 +174,7 @@ public class WebFormPageTests {
 
         assertEquals("Type to search...", dataList.getDomAttribute("placeholder"));
         dataList.sendKeys("CustomValue");
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals("CustomValue", dataList.getDomProperty("value"));
         dataList.clear();
 
@@ -179,7 +185,7 @@ public class WebFormPageTests {
             String optionValue = option.getAttribute("value");
             dataList.sendKeys(optionValue);
             assertEquals(optionValue, dataList.getDomProperty("value"));
-            Thread.sleep(2000);
+            Thread.sleep(timeoutMedium);
         }
     }
 
@@ -210,11 +216,11 @@ public class WebFormPageTests {
         WebElement fileInput = driver.findElement(By.xpath("//input[@name='my-file']"));
         assertEquals("File input", fileInput.findElement(By.xpath("..")).getText());
         fileInput.sendKeys(selectFile);
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         WebElement form = driver.findElement(By.xpath("//form"));
         form.submit();
         assertThat(driver.getCurrentUrl()).contains("file.txt");
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals("Form submitted", driver.findElement(By.className("display-6")).getText());
     }
 
@@ -228,14 +234,14 @@ public class WebFormPageTests {
         assertTrue(checkedCheckbox.isSelected());
         assertFalse(defauleChechbox.isSelected());
         checkedCheckbox.click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertFalse(checkedCheckbox.isSelected());
         assertFalse(defauleChechbox.isSelected());
         defauleChechbox.click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertFalse(checkedCheckbox.isSelected());
         assertTrue(defauleChechbox.isSelected());
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
     }
 
     @DisplayName("Тест Radiobuttons")
@@ -248,14 +254,14 @@ public class WebFormPageTests {
         assertTrue(checkedRaiobutton.isSelected());
         assertFalse(defaultRaiobutton.isSelected());
         defaultRaiobutton.click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertFalse(checkedRaiobutton.isSelected());
         assertTrue(defaultRaiobutton.isSelected());
         checkedRaiobutton.click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertTrue(checkedRaiobutton.isSelected());
         assertFalse(defaultRaiobutton.isSelected());
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
     }
 
 
@@ -266,20 +272,20 @@ public class WebFormPageTests {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Web form']")).click();
         //1й вариант сабмита: по клику
         driver.findElement(By.xpath("//button[text()='Submit']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         driver.findElement(By.xpath("//h1[text()='Form submitted']"));
         driver.findElement(By.xpath("//p[text()='Received!']"));
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         driver.navigate().back();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         //2й вариант сабмита: по сабмиту
         driver.findElement(By.xpath("//form")).submit();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         driver.findElement(By.xpath("//h1[text()='Form submitted']"));
         driver.findElement(By.xpath("//p[text()='Received!']"));
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         driver.navigate().back();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
     }
 
 
@@ -289,11 +295,11 @@ public class WebFormPageTests {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Web form']")).click();
         WebElement colorPicker = driver.findElement(By.xpath("//label[normalize-space(.)='Color picker']/input"));
 //        Вариант с sendkeys
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         colorPicker.sendKeys("#00ff00");
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals("#00ff00", colorPicker.getDomProperty("value"));
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
 
 //        Вариант с JS
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -301,14 +307,14 @@ public class WebFormPageTests {
         Color red = new Color(255, 0, 0, 1);
         Color blue = new Color(0, 0, 255, 1);
         String script = "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('change'));";
-        Thread.sleep(3000);
+        Thread.sleep(timeoutSlow);
 
         js.executeScript(script, colorPicker, red.asHex());
         assertEquals("#ff0000", colorPicker.getDomProperty("value"));
-        Thread.sleep(3000);
+        Thread.sleep(timeoutSlow);
         js.executeScript(script, colorPicker, blue.asHex());
         assertEquals("#0000ff", colorPicker.getDomProperty("value"));
-        Thread.sleep(3000);
+        Thread.sleep(timeoutSlow);
     }
 
     @DisplayName("Тест Date Picker")
@@ -327,7 +333,7 @@ public class WebFormPageTests {
         WebElement dateToSelect = driver.findElement(By.xpath(String.format("//td[@class='%s' and text()='%s']", xpathClassName, newDate.getDayOfMonth())));
         dateToSelect.click();
         assertEquals(newDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")), datePickerInput.getDomProperty("value"));
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         datePickerInput.clear();
 
         //1й вариант с динамически введенной датой
@@ -335,14 +341,14 @@ public class WebFormPageTests {
         System.out.println("currentDate = " + currentDate);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.querySelector('input[name=\"my-date\"]').value = '" + currentDate + "';");
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals(currentDate, datePickerInput.getDomProperty("value"));
         datePickerInput.clear();
 
         //2й вариант с захардкоженой датой
         datePickerInput.sendKeys("01 18 1989");
         datePickerInput.sendKeys(Keys.ENTER);
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals("01/18/1989", datePickerInput.getDomProperty("value"));
 
 
@@ -353,19 +359,19 @@ public class WebFormPageTests {
     void ExampleRangeTest () throws InterruptedException {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Web form']")).click();
         WebElement exampleRange = driver.findElement(By.xpath("//label[normalize-space(.)='Example range']/input"));
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals("5", exampleRange.getDomProperty("value"));
 
         //работа через клавиатуру
         exampleRange.sendKeys(Keys.ARROW_RIGHT);
-        Thread.sleep(500);
+        Thread.sleep(timeoutWeryFast);
         assertEquals("6", exampleRange.getDomProperty("value"));
         actions
                 .sendKeys(Keys.ARROW_LEFT)
-                .pause(500)
+                .pause(timeoutWeryFast)
                 .sendKeys(Keys.ARROW_LEFT)
                 .perform();
-        Thread.sleep(500);
+        Thread.sleep(timeoutWeryFast);
         assertEquals("4", exampleRange.getDomProperty("value"));
 
         //работа через мышь
@@ -380,7 +386,7 @@ public class WebFormPageTests {
                     .moveToLocation(x + width / 10 * i, y)
                     .release()
                     .perform();
-            Thread.sleep(500);
+            Thread.sleep(timeoutWeryFast);
             assertEquals(String.valueOf(i), exampleRange.getDomProperty("value"));
         }
 
@@ -391,7 +397,7 @@ public class WebFormPageTests {
                     .moveToLocation(x + width / 10 * i, y)
                     .release()
                     .perform();
-            Thread.sleep(500);
+            Thread.sleep(timeoutWeryFast);
             assertEquals(String.valueOf(i), exampleRange.getDomProperty("value"));
         }
 

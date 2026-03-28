@@ -1,6 +1,8 @@
 package ui;
 
 import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +20,7 @@ import static org.openqa.selenium.PageLoadStrategy.NONE;
 public class OtherTests {
     WebDriver driver;
     //Конфиг берется из configs.TestConfig
-    TestConfig config = new TestConfig();
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
     String baseUrl = config.getBaseUrl();
 
     @BeforeEach

@@ -16,9 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginPageTests {
     WebDriver driver;
-    //используем конфиг из TestPropertiesConfig
-    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    //используем конфиг из TestConfig
+    TestConfig config = new TestConfig();
+//    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
     String baseUrl = config.getBaseUrl();
+    String timeoutFast = config.getTimeoutFast();
+
 
     @BeforeEach
     void setup(){
@@ -39,11 +42,10 @@ public class LoginPageTests {
 
         driver.findElement(By.id("username")).sendKeys(config.getUsername());
         driver.findElement(By.id("password")).sendKeys(config.getPassword());
-        Thread.sleep(1000);
+        Thread.sleep(Long.parseLong(timeoutFast));
         driver.findElement(By.xpath("//button[@type = 'submit']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(Long.parseLong(timeoutFast));
         WebElement message = driver.findElement(By.className("alert"));
-
         assertEquals("Login successful", message.getText());
     }
 }
