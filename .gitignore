@@ -39,7 +39,9 @@ bin/
 .DS_Store
 
 # Игнорируем все .properties файлы в ресурсах
-#src/test/resources/*.properties
-#src/main/resources/*.properties
+src/test/resources/*.properties
+src/main/resources/*.properties
 # Исключение: разрешаем загружать файл (если нужно)
-#!src/test/resources/dev.properties
+!src/test/resources/dev.properties
+!src/test/resources/test.properties
+!src/test/resources/default.properties
