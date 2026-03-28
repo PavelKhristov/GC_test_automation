@@ -42,6 +42,6 @@ bin/
 src/test/resources/*.properties
 src/main/resources/*.properties
 # Исключение: разрешаем загружать файл (если нужно)
-!src/test/resources/dev.properties
-!src/test/resources/test.properties
-!src/test/resources/default.properties
+#!src/test/resources/dev.properties
+#!src/test/resources/test.properties
+#!src/test/resources/default.properties
