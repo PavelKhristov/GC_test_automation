@@ -1,3 +1,8 @@
+package ui;
+
+import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,12 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class IframesPageTests {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    String baseUrl = config.getBaseUrl();
+    Integer timeoutWeryFast = config.getTimeoutWeryFast();
+    Integer timeoutFast = config.getTimeoutFast();
+    Integer timeoutMedium = config.getTimeoutMedium();
+    Integer timeoutSlow = config.getTimeoutSlow();
 
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
     };
 
@@ -30,12 +40,12 @@ public class IframesPageTests {
     @DisplayName("Тест для iframe")
     @Test
     void iframeTest() throws InterruptedException {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/iframes.html");
+        driver.get(baseUrl + "iframes.html");
         assertThrows(NoSuchElementException.class, () -> driver.findElement(By.className("lead"))); //ошибка при попытке найти элемент внутри iframe
         WebElement iframeElement = driver.findElement(By.id("my-iframe"));
 
         driver.switchTo().frame(iframeElement);
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
 
         assertThrows(NoSuchElementException.class, () -> driver.findElement(By.className("display-6")));//ошибка при попытке найти элемент вне iframe
         assertThat(driver.findElement(By.className("lead")).getText()).contains("Lorem ipsum");

@@ -17,8 +17,11 @@ dependencies {
     implementation 'commons-io:commons-io:2.16.0'
     implementation 'io.qameta.allure:allure-junit5:2.25.0'
     implementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
+    testImplementation 'org.aeonbits.owner:owner:1.0.12'
 }
 
 test {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
+    //Пример как еще можно задать проперти:systemProperty "baseUrl", System.getProperty("baseUrl", "https://bonigarcia.dev/selenium-webdriver-java/")
 }

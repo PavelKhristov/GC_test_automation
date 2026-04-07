@@ -1,3 +1,8 @@
+package ui;
+
+import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,12 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ShadowDOMPageTests {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    String baseUrl = config.getBaseUrl();
 
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
     };
 
@@ -27,7 +33,7 @@ public class ShadowDOMPageTests {
     @DisplayName("Тест ShadowDOM")
     @Test
     void testShadowDom() {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/shadow-dom.html");
+        driver.get(baseUrl + "shadow-dom.html");
 
         assertThrows(NoSuchElementException.class, () -> driver.findElement(By.cssSelector("p")));
         WebElement content = driver.findElement(By.id("content"));

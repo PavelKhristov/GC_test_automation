@@ -1,3 +1,8 @@
+package ui;
+
+import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,12 +19,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CookiesPageTests {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+//    TestConfig config = new TestConfig();
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    String baseUrl = config.getBaseUrl();
+    Integer timeoutWeryFast = config.getTimeoutWeryFast();
+    Integer timeoutFast = config.getTimeoutFast();
+    Integer timeoutMedium = config.getTimeoutMedium();
+    Integer timeoutSlow = config.getTimeoutSlow();
 
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
     };
 
@@ -31,7 +42,7 @@ public class CookiesPageTests {
     @DisplayName("Тест для cookies")
     @Test
     void cookieTest() throws InterruptedException {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/cookies.html");
+        driver.get(baseUrl + "cookies.html");
         WebDriver.Options options = driver.manage();
         Set<Cookie> cookies = options.getCookies();
         assertThat(cookies).hasSize(2);
@@ -39,7 +50,7 @@ public class CookiesPageTests {
         assertThat(username.getValue()).isEqualTo("John Doe");
         assertThat(username.getPath()).isEqualTo("/");
 
-        Thread.sleep(2000);
+        Thread.sleep(timeoutMedium);
         driver.findElement(By.id("refresh-cookies")).click();
 
         Cookie newCookie = new Cookie("new-cookie-key", "new-cookie-value");
@@ -51,7 +62,7 @@ public class CookiesPageTests {
         cookies = options.getCookies();
         assertThat(cookies).hasSize(3);
 
-        Thread.sleep(2000);
+        Thread.sleep(timeoutMedium);
         driver.findElement(By.id("refresh-cookies")).click();
 
         String[] actualText = driver.findElement(By.id("cookies-list")).getText().split("\n");
@@ -62,7 +73,7 @@ public class CookiesPageTests {
         options.deleteCookie(username);
         assertThat(options.getCookies()).hasSize(cookies.size() - 1);
 
-        Thread.sleep(2000);
+        Thread.sleep(timeoutMedium);
         driver.findElement(By.id("refresh-cookies")).click();
     }
 

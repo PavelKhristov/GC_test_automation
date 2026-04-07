@@ -1,10 +1,14 @@
+package ui;
+
+import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
@@ -16,7 +20,12 @@ public class NaviationPageTests {
     //убрал Actions, для реализации разных способов
     //Actions actions;
 
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    String baseUrl = config.getBaseUrl();
+    Integer timeoutWeryFast = config.getTimeoutWeryFast();
+    Integer timeoutFast = config.getTimeoutFast();
+    Integer timeoutMedium = config.getTimeoutMedium();
+    Integer timeoutSlow = config.getTimeoutSlow();
     private static final String firstPageText =
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     private static final String middlePageText =
@@ -27,7 +36,7 @@ public class NaviationPageTests {
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
         //actions = new Actions(driver);
     };
@@ -43,7 +52,7 @@ public class NaviationPageTests {
         driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and text() = 'Navigation']")).click();
 
         assertEquals(firstPageText, driver.findElement(By.className("lead")).getText());
-        assertEquals("https://bonigarcia.dev/selenium-webdriver-java/navigation1.html", driver.getCurrentUrl());
+        assertEquals(baseUrl + "navigation1.html", driver.getCurrentUrl());
         List<WebElement> buttons = driver.findElements(By.xpath("//li[contains(@class, 'page-item')]"));
         assertEquals(5, buttons.size());
         Assertions.assertTrue(
@@ -52,39 +61,39 @@ public class NaviationPageTests {
 
 
         driver.findElement(By.linkText("2")).click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals(middlePageText, driver.findElement(By.className("lead")).getText());
         Assertions.assertTrue(
                 driver.findElement(By.xpath("//a[text()='2']/..")).getAttribute("class").contains("active"));
 
 
         driver.findElement(By.linkText("3")).click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals(lastPageText, driver.findElement(By.className("lead")).getText());
         Assertions.assertThrows(ElementNotInteractableException.class, () -> driver.findElement(By.linkText("Next")).click());
         Assertions.assertTrue(
                 driver.findElement(By.xpath("//a[text()='3']/..")).getAttribute("class").contains("active"));
 
         driver.findElement(By.linkText("1")).click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals(firstPageText, driver.findElement(By.className("lead")).getText());
         Assertions.assertThrows(ElementNotInteractableException.class, () -> driver.findElement(By.linkText("Previous")).click());
         Assertions.assertTrue(
                 driver.findElement(By.xpath("//a[text()='1']/..")).getAttribute("class").contains("active"));
 
         driver.findElement(By.linkText("Next")).click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals(middlePageText, driver.findElement(By.className("lead")).getText());
         Assertions.assertTrue(
                 driver.findElement(By.xpath("//a[text()='2']/..")).getAttribute("class").contains("active"));
 
         driver.findElement(By.linkText("Previous")).click();
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
         assertEquals(firstPageText, driver.findElement(By.className("lead")).getText());
         Assertions.assertTrue(
                 driver.findElement(By.xpath("//a[text()='1']/..")).getAttribute("class").contains("active"));
         Assertions.assertThrows(ElementNotInteractableException.class, () -> driver.findElement(By.linkText("Previous")).click());
-        Thread.sleep(1000);
+        Thread.sleep(timeoutFast);
 
     }
 }

@@ -1,3 +1,8 @@
+package ui;
+
+import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,12 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HomePageTests {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    String baseUrl = config.getBaseUrl();
 
     @BeforeEach
     void setup(){
         driver = new ChromeDriver ();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
     };
 
@@ -129,7 +135,7 @@ public class HomePageTests {
         driver.findElement(By.xpath(link)).click();
         WebElement actualTitle = driver.findElement(By.className("display-6"));
 
-        assertEquals(BASE_URL + url, driver.getCurrentUrl());
+        assertEquals(baseUrl + url, driver.getCurrentUrl());
         assertEquals(title, actualTitle.getText());
     }
 

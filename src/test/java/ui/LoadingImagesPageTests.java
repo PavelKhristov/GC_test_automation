@@ -1,3 +1,8 @@
+package ui;
+
+import configs.TestConfig;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,12 +24,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LoadingImagesPageTests {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    String baseUrl = config.getBaseUrl();
 
     @BeforeEach
     void setup(){
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseUrl);
         driver.manage().window().maximize();
     };
 
@@ -36,7 +42,7 @@ public class LoadingImagesPageTests {
     @DisplayName("Тест с явным ожиданием")
     @Test
     void loadingImagesTest() {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/loading-images.html");
+        driver.get(baseUrl + "loading-images.html");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement loadingText = driver.findElement(By.id("text"));
         WebElement loadingSpinner = driver.findElement(By.id("spinner"));
@@ -72,7 +78,7 @@ public class LoadingImagesPageTests {
     @DisplayName("Пример теста с неявным ожиданием")
     @Test
     void limplicitWaitTest() {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/loading-images.html");
+        driver.get(baseUrl + "loading-images.html");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         /*тест не ждет 20 сек., т.к. постоянно выполняет проверку и локатор находится раньше.
         Минус в том что если локатор не будет найден, то тест будет бежать 20 секунд.
@@ -85,7 +91,7 @@ public class LoadingImagesPageTests {
     @DisplayName("Пример теста с явным ожиданием")
     @Test
     void explicitWaitTest() {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/loading-images.html");
+        driver.get(baseUrl + "loading-images.html");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@id='image-container']/img"), 4));
@@ -94,7 +100,7 @@ public class LoadingImagesPageTests {
     @DisplayName("Пример теста с гибким ожиданием")
     @Test
     void fluentWaitTest() {
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/loading-images.html");
+        driver.get(baseUrl + "loading-images.html");
         Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofSeconds(1))
