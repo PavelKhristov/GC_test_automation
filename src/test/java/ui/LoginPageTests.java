@@ -14,26 +14,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoginPageTests {
-    WebDriver driver;
+public class LoginPageTests extends BaseTest{
+
     //используем конфиг из TestConfig
     TestConfig config = new TestConfig();
-//    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    String baseUrl = config.getBaseUrl();
     String timeoutFast = config.getTimeoutFast();
 
-
-    @BeforeEach
-    void setup(){
-        driver = new ChromeDriver();
-        driver.get(baseUrl);
-        driver.manage().window().maximize();
-    };
-
-    @AfterEach
-    void tearDown (){
-        driver.quit();
-    };
 
     @DisplayName("Тест авторизации")
     @Test

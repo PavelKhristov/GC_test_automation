@@ -1,31 +1,18 @@
 package ui;
 
-import configs.TestConfig;
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class NaviationPageTests {
+public class NaviationPageTests extends BaseTest{
 
-    WebDriver driver;
-    //убрал Actions, для реализации разных способов
-    //Actions actions;
-
-    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    String baseUrl = config.getBaseUrl();
-    Integer timeoutWeryFast = config.getTimeoutWeryFast();
-    Integer timeoutFast = config.getTimeoutFast();
-    Integer timeoutMedium = config.getTimeoutMedium();
-    Integer timeoutSlow = config.getTimeoutSlow();
     private static final String firstPageText =
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     private static final String middlePageText =
@@ -33,18 +20,6 @@ public class NaviationPageTests {
     private static final String lastPageText =
             "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-    @BeforeEach
-    void setup(){
-        driver = new ChromeDriver();
-        driver.get(baseUrl);
-        driver.manage().window().maximize();
-        //actions = new Actions(driver);
-    };
-
-    @AfterEach
-    void tearDown (){
-        driver.quit();
-    };
 
     @DisplayName("Тест Navigation")
     @Test
