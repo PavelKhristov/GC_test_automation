@@ -5,23 +5,20 @@ import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class WebFormPage {
+public class WebFormPage extends BasePage{
 
-    WebDriver driver;
+//    WebDriver driver;
     private static final String WEB_FORM_URL = "web-form.html";
+
+    public WebFormPage(WebDriver driver) {
+        super(driver);
+    }
 
     //locators
     By title = By.className("display-6");
 
     //actions
 
-    public WebFormPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public String getCurrentUrl() {
-        return driver.getCurrentUrl();
-    }
 
     public String getUrl() {
         return WEB_FORM_URL;

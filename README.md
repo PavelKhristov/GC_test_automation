@@ -26,4 +26,5 @@
    - TestConfig используется в LoginPageTests, TestPropertiesConfig используется в остальных тестах
    - test.properties имеет нулевые задержки для Thread.sleep (для быстрой проверки), остальные имеют не нулевые значения (для наглядности)
 3. 3-PageObject
-   - забавлен BaseTest
+   - добавлен BaseTest для простых тестов
+   - добавлены POM: в pages страницы, а в POMTests тесты

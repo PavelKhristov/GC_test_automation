@@ -16,7 +16,8 @@ class HomePageWithPOMTests extends BaseTestForPOM {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        String actualTitle = homePage.getTitle();
+        String actualTitle = homePage.getMainTitle();
+        assertEquals(baseUrl, homePage.getCurrentUrl());
         assertEquals("Hands-On Selenium WebDriver with Java", actualTitle);
     };
 

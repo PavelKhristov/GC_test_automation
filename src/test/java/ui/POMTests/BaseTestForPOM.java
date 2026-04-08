@@ -15,6 +15,7 @@ public class BaseTestForPOM {
     WebDriver driver;
     Actions actions;
     TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    String baseUrl = config.getBaseUrl();
 
     //Таймауты
     Integer timeoutWeryFast = config.getTimeoutWeryFast();

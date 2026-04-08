@@ -17,8 +17,9 @@ public class WebFormPageWithPOMTests extends BaseTestForPOM {
         homePage.open();
         WebFormPage webFormPage = homePage.openWebformPage();
 
-        assertEquals(homePage.getBaseUrl() + webFormPage.getUrl(), webFormPage.getCurrentUrl());
+        assertEquals(baseUrl + webFormPage.getUrl(), webFormPage.getCurrentUrl());
         assertEquals("Web form", webFormPage.getTitle());
+        assertEquals("Hands-On Selenium WebDriver with Java", webFormPage.getMainTitle());
 
     }
 
