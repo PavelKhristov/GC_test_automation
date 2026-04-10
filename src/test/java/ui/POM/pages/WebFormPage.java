@@ -1,4 +1,4 @@
-package ui.pages;
+package ui.POM.pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ui.constants.CommonConstants.WEB_FORM_URL;
+import static constants.Constants.*;
 
 public class WebFormPage extends BasePage{
 

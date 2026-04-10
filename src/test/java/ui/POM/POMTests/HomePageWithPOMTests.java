@@ -1,10 +1,10 @@
-package ui.POMTests;
+package ui.POM.POMTests;
 
 
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ui.pages.HomePage;
+import ui.POM.pages.HomePage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 @Feature("POM")

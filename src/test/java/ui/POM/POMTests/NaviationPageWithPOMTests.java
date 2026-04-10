@@ -1,13 +1,13 @@
-package ui.POMTests;
+package ui.POM.POMTests;
 
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ui.pages.NavigationPage;
+import ui.POM.pages.NavigationPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ui.constants.CommonConstants.*;
+import static constants.Constants.*;
 
 @Feature("POM")
 public class NaviationPageWithPOMTests extends BaseTestForPOM {

@@ -1,4 +1,4 @@
-package ui.POMTests;
+package ui.POM.POMTests;
 
 import configs.TestPropertiesConfig;
 import org.aeonbits.owner.ConfigFactory;
@@ -7,9 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import ui.pages.HomePage;
-
-import java.time.Duration;
+import ui.POM.pages.HomePage;
 
 public class BaseTestForPOM {
 

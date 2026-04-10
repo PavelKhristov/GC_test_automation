@@ -1,4 +1,4 @@
-package ui.pages;
+package ui.POM.pages;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
