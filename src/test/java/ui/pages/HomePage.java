@@ -1,8 +1,6 @@
 package ui.pages;
 
-import configs.TestPropertiesConfig;
 import io.qameta.allure.Step;
-import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,9 +18,6 @@ public class HomePage extends BasePage{
     private void open() {
         driver.get(baseUrl);
     }
-
-
-
 
 
 

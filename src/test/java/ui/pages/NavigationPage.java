@@ -14,13 +14,6 @@ public class NavigationPage extends BasePage{
         super(driver);
     }
 
-    private static final String firstPageText =
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    private static final String secondPageText =
-            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
-    private static final String thirdPageText =
-            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-    private static final String NAVIGATION_PAGE_URL = "navigation1.html";
 
     //locators
     By title = By.className("display-6");
@@ -30,22 +23,7 @@ public class NavigationPage extends BasePage{
     By buttons = By.xpath("//li[contains(@class, 'page-item')]");
 
     //actions
-    public String FirstPageText() {
-        return firstPageText;
-    }
 
-    public String SecondPageText() {
-        return secondPageText;
-    }
-
-    public String ThirdPageText() {
-        return thirdPageText;
-    }
-
-    @Step("Get subpage url")
-    public String getUrl() {
-        return NAVIGATION_PAGE_URL;
-    }
 
     @Step("Get subpage title")
     public String getTitle() {

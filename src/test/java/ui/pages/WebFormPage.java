@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static ui.constants.CommonConstants.WEB_FORM_URL;
 
 public class WebFormPage extends BasePage{
 
@@ -13,7 +14,7 @@ public class WebFormPage extends BasePage{
         super(driver);
     }
 
-    private static final String WEB_FORM_URL = "web-form.html";
+//    private static final String WEB_FORM_URL = "web-form.html";
 
     //locators
     By title = By.className("display-6");
@@ -38,7 +39,7 @@ public class WebFormPage extends BasePage{
     }
     @Step("Validate current URL")
     public void validateCurrentURL() {
-        assertEquals(getBaseUrl() + WEB_FORM_URL, getCurrentUrl());
+        assertEquals(baseUrl + WEB_FORM_URL, getCurrentUrl());
     }
     @Step("Validate Title Name")
     public void validateTitleName(String titleName) {
