@@ -1,5 +1,6 @@
 package ui.pages;
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -40,30 +41,31 @@ public class NavigationPage extends BasePage{
         return thirdPageText;
     }
 
+    @Step("Get subpage url")
     public String getUrl() {
         return NAVIGATION_PAGE_URL;
     }
-
+    @Step("Get subpage title")
     public String getTitle() {
         return driver.findElement(title).getText();
     }
-
+    @Step("Get page text")
     public String getPageText() {
         return driver.findElement(pageText).getText();
     }
-
+    @Step("Get buttons")
     public List<WebElement> getButtons() {
         return driver.findElements(buttons);
     }
-
+    @Step("Get property=active")
     public boolean checkButtonIsActive(String buttonName) {
         return driver.findElement(By.xpath("//a[text()='" + buttonName + "']/..")).getAttribute("class").contains("active");
     }
-
+    @Step("Validate that button is not clickable")
     public void checkButtonIsNotClickable(String buttonName) {
         Assertions.assertThrows(ElementNotInteractableException.class, () -> driver.findElement(By.linkText(buttonName)).click());
     }
-
+    @Step("Click button")
     public void clickButton(String buttonName) {
         driver.findElement(By.linkText(buttonName)).click();
     }

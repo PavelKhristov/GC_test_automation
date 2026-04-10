@@ -1,5 +1,6 @@
 package ui.POMTests;
 
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -7,7 +8,7 @@ import ui.pages.HomePage;
 import ui.pages.WebFormPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+@Feature("POM")
 public class WebFormPageWithPOMTests extends BaseTestForPOM {
 
 
