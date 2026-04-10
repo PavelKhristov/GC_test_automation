@@ -23,4 +23,8 @@ public class BasePage {
     public String getMainTitle() {
         return driver.getTitle();
     }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
 }

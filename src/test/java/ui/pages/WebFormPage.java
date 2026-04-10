@@ -2,6 +2,7 @@ package ui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class WebFormPage extends BasePage{
 
@@ -14,6 +15,10 @@ public class WebFormPage extends BasePage{
     //locators
     By title = By.className("display-6");
 
+    By pageText = By.className("lead");
+
+    WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
+
     //actions
 
 
@@ -25,10 +30,23 @@ public class WebFormPage extends BasePage{
         return driver.findElement(title).getText();
     }
 
+    public String getPageText() {
+        return driver.findElement(pageText).getText();
+    }
+
+    public void submit() {
+        submitButton.click();
+    }
+
+
+
+
+
     //method -> open another page objects
     public HomePage openHomePage(){
         driver.findElement(By.linkText("Return to index")).click();
         return new HomePage(driver);
     }
+
 
 }

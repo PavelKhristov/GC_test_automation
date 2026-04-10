@@ -9,14 +9,20 @@ public class HomePage extends BasePage{
 
     public HomePage(WebDriver driver) {
         super(driver);
+        open();
     }
 
     //locators
 
     //actions
-    public void open() {
+    private void open() {
         driver.get(baseUrl);
     }
+
+
+
+
+
 
     //method -> open another page objects
     public WebFormPage openWebformPage(){

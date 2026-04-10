@@ -14,12 +14,11 @@ public class NaviationPageWithPOMTests extends BaseTestForPOM {
 
     @DisplayName("Тест NavigationPage with POM")
     @Test
-    void ReturnToIndexTest () throws InterruptedException {
+    void NavigationPageTest () throws InterruptedException {
         HomePage homePage = new HomePage(driver);
-        homePage.open();
         NavigationPage navigationPage = homePage.openNavigationPage();
 
-        assertEquals(baseUrl + navigationPage.getUrl(), navigationPage.getCurrentUrl());
+        assertEquals(homePage.getBaseUrl() + navigationPage.getUrl(), navigationPage.getCurrentUrl());
         assertEquals("Navigation example", navigationPage.getTitle());
         assertEquals("Hands-On Selenium WebDriver with Java", navigationPage.getMainTitle());
 
