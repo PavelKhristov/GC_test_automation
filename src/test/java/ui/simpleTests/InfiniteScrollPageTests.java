@@ -1,4 +1,4 @@
-package ui;
+package ui.simpleTests;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
-public class InfiniteScrollPageTests extends BaseTest{
+public class InfiniteScrollPageTests extends BaseTest {
 
 
     @DisplayName("Тест Infinite Scroll via js")

@@ -1,4 +1,4 @@
-package ui;
+package ui.simpleTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class NaviationPageTests extends BaseTest{
+public class NaviationPageTests extends BaseTest {
 
     private static final String firstPageText =
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";

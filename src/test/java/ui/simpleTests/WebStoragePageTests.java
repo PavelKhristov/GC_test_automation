@@ -1,4 +1,4 @@
-package ui;
+package ui.simpleTests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.openqa.selenium.html5.WebStorage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WebStoragePageTests extends BaseTest{
+public class WebStoragePageTests extends BaseTest {
 
     //html5 можно найти в 'org.seleniumhq.selenium:selenium-java:4.30.0'
     @DisplayName("Тест WebStorage")

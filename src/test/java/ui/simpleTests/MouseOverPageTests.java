@@ -1,4 +1,4 @@
-package ui;
+package ui.simpleTests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
-public class MouseOverPageTests extends BaseTest{
+public class MouseOverPageTests extends BaseTest {
 
 
 

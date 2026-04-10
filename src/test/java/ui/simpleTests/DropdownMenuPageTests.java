@@ -1,4 +1,4 @@
-package ui;
+package ui.simpleTests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DropdownMenuPageTests extends BaseTest{
+public class DropdownMenuPageTests extends BaseTest {
 
 
 

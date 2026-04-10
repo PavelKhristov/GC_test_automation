@@ -1,4 +1,4 @@
-package ui;
+package ui.simpleTests;
 
 import configs.TestPropertiesConfig;
 import org.aeonbits.owner.ConfigFactory;

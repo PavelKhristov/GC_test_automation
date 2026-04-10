@@ -1,4 +1,4 @@
-package ui;
+package ui.simpleTests;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;

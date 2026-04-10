@@ -1,4 +1,4 @@
-package ui;
+package ui.simpleTests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ShadowDOMPageTests extends BaseTest{
+public class ShadowDOMPageTests extends BaseTest {
 
 
     @DisplayName("Тест ShadowDOM")

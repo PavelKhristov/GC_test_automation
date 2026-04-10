@@ -6,20 +6,20 @@
 Бранчи:
 1. 1-simple-UI-Tests:
     - Сделаны простые тесты
-      - ui.HomePageTests - Проверяется открытие головной страницы и открытие некоторых страницы в каждом из Chapter
-      - ui.WebFormPageTests
-      - NavigationPageTests
-      - ui.DropdownMenuPageTests
-      - ui.MouseOverPageTests
-      - ui.DragAndDropPageTests
-      - ui.LoadingImagesPageTests
-      - ui.InfiniteScrollPageTests
-      - ui.ShadowDOMPageTests
-      - ui.CookiesPageTests
-      - ui.IframesPageTests
-      - ui.DialogBoxesPageTests
-      - ui.WebStoragePageTests
-      - ui.OtherTests - тесты по работе табами и окнами браузера
+      - ui.simpleTests.HomePageTests - Проверяется открытие головной страницы и открытие некоторых страницы в каждом из Chapter
+      - ui.simpleTests.WebFormPageTests
+      - ui.simpleTests.NavigationPageTests
+      - ui.simpleTests.DropdownMenuPageTests
+      - ui.simpleTests.MouseOverPageTests
+      - ui.simpleTests.DragAndDropPageTests
+      - ui.simpleTests.LoadingImagesPageTests
+      - ui.simpleTests.InfiniteScrollPageTests
+      - ui.simpleTests.ShadowDOMPageTests
+      - ui.simpleTests.CookiesPageTests
+      - ui.simpleTests.IframesPageTests
+      - ui.simpleTests.DialogBoxesPageTests
+      - ui.simpleTests.WebStoragePageTests
+      - ui.simpleTests.OtherTests - тесты по работе табами и окнами браузера
 2. 2-Properties:
    - создание констант, системных переменных и проперти файла
    - использование проперти файлов с использованием библиотеки Owner

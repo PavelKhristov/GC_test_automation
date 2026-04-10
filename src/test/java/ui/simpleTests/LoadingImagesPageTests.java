@@ -1,4 +1,4 @@
-package ui;
+package ui.simpleTests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import java.time.Duration;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LoadingImagesPageTests extends BaseTest{
+public class LoadingImagesPageTests extends BaseTest {
 
 
     @DisplayName("Тест с явным ожиданием")
