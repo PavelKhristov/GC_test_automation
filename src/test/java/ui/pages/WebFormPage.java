@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class WebFormPage extends BasePage{
 
     public WebFormPage(WebDriver driver) {
@@ -23,21 +25,37 @@ public class WebFormPage extends BasePage{
     //actions
 
     @Step("Get subpage url")
-    public String getUrl() {
+    private String getUrl() {
         return WEB_FORM_URL;
     }
 
     @Step("Get subpage title")
-    public String getTitle() {
+    private String getTitle() {
         return driver.findElement(title).getText();
     }
     @Step("Get page text")
-    public String getPageText() {
+    private String getPageText() {
         return driver.findElement(pageText).getText();
     }
     @Step("Submit page")
     public void submit() {
         submitButton.click();
+    }
+    @Step("Validate current URL")
+    public void validateCurrentURL() {
+        assertEquals(getBaseUrl() + getUrl(), getCurrentUrl());
+    }
+    @Step("Validate Title Name")
+    public void validateTitleName(String titleName) {
+        assertEquals(titleName, getTitle());
+    }
+    @Step("Validate Page Text")
+    public void validatePageText(String pageText) {
+        assertEquals(pageText, getPageText());
+    }
+    @Step("Validate Main Title Name")
+    public void validateMainTitleName() {
+        assertEquals("Hands-On Selenium WebDriver with Java", getMainTitle());
     }
 
 
