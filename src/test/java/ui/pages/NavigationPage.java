@@ -13,6 +13,7 @@ public class NavigationPage extends BasePage{
     public NavigationPage(WebDriver driver) {
         super(driver);
     }
+
     private static final String firstPageText =
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     private static final String secondPageText =
@@ -45,10 +46,12 @@ public class NavigationPage extends BasePage{
     public String getUrl() {
         return NAVIGATION_PAGE_URL;
     }
+
     @Step("Get subpage title")
     public String getTitle() {
         return driver.findElement(title).getText();
     }
+
     @Step("Get page text")
     public String getPageText() {
         return driver.findElement(pageText).getText();
@@ -57,6 +60,7 @@ public class NavigationPage extends BasePage{
     public List<WebElement> getButtons() {
         return driver.findElements(buttons);
     }
+
     @Step("Get property=active")
     public boolean checkButtonIsActive(String buttonName) {
         return driver.findElement(By.xpath("//a[text()='" + buttonName + "']/..")).getAttribute("class").contains("active");

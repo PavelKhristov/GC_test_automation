@@ -11,13 +11,15 @@ import ui.pages.WebFormPage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 @Feature("POM")
 public class WebFormPageWithPOMTests extends BaseTestForPOM {
+    HomePage homePage;
 
+    WebFormPage webFormPage;
 
     @DisplayName("Тест WebFormPage with POM")
     @Test
     void OpenWebFormTest () {
-        HomePage homePage = new HomePage(driver);
-        WebFormPage webFormPage = homePage.openWebformPage();
+        homePage = new HomePage(driver);
+        webFormPage = homePage.openWebformPage();
 
         webFormPage.validateCurrentURL();
         webFormPage.validateTitleName("Web form");
@@ -27,8 +29,8 @@ public class WebFormPageWithPOMTests extends BaseTestForPOM {
     @DisplayName("Тест Submit кнопки")
     @Test
     void SubmitFormTest () throws InterruptedException {
-        HomePage homePage = new HomePage(driver);
-        WebFormPage webFormPage = homePage.openWebformPage();
+        homePage = new HomePage(driver);
+        webFormPage = homePage.openWebformPage();
         webFormPage.submit();
         Thread.sleep(timeoutFast);
         webFormPage.validateTitleName("Form submitted");

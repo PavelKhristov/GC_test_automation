@@ -10,12 +10,15 @@ import ui.pages.NavigationPage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 @Feature("POM")
 public class NaviationPageWithPOMTests extends BaseTestForPOM {
+    HomePage homePage;
+
+    NavigationPage navigationPage;
 
     @DisplayName("Тест NavigationPage with POM")
     @Test
     void NavigationPageTest () throws InterruptedException {
-        HomePage homePage = new HomePage(driver);
-        NavigationPage navigationPage = homePage.openNavigationPage();
+        homePage = new HomePage(driver);
+        navigationPage = homePage.openNavigationPage();
 
         assertEquals(homePage.getBaseUrl() + navigationPage.getUrl(), navigationPage.getCurrentUrl());
         assertEquals("Navigation example", navigationPage.getTitle());

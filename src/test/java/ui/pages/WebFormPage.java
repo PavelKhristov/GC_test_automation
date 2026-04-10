@@ -24,11 +24,6 @@ public class WebFormPage extends BasePage{
 
     //actions
 
-    @Step("Get subpage url")
-    private String getUrl() {
-        return WEB_FORM_URL;
-    }
-
     @Step("Get subpage title")
     private String getTitle() {
         return driver.findElement(title).getText();
@@ -43,7 +38,7 @@ public class WebFormPage extends BasePage{
     }
     @Step("Validate current URL")
     public void validateCurrentURL() {
-        assertEquals(getBaseUrl() + getUrl(), getCurrentUrl());
+        assertEquals(getBaseUrl() + WEB_FORM_URL, getCurrentUrl());
     }
     @Step("Validate Title Name")
     public void validateTitleName(String titleName) {
