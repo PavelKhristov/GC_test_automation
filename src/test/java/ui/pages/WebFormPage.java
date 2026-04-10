@@ -1,18 +1,15 @@
 package ui.pages;
 
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class WebFormPage extends BasePage{
 
-//    WebDriver driver;
-    private static final String WEB_FORM_URL = "web-form.html";
-
     public WebFormPage(WebDriver driver) {
         super(driver);
     }
+
+    private static final String WEB_FORM_URL = "web-form.html";
 
     //locators
     By title = By.className("display-6");
@@ -29,5 +26,9 @@ public class WebFormPage extends BasePage{
     }
 
     //method -> open another page objects
+    public HomePage openHomePage(){
+        driver.findElement(By.linkText("Return to index")).click();
+        return new HomePage(driver);
+    }
 
 }

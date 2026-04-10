@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class WebFormPageWithPOMTests extends BaseTestForPOM {
 
 
-    @DisplayName("Тест Return to index")
+    @DisplayName("Тест WebFormPage with POM")
     @Test
     void ReturnToIndexTest () {
         HomePage homePage = new HomePage(driver);

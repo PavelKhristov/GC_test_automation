@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 
 public class HomePage extends BasePage{
 
-
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -23,6 +22,11 @@ public class HomePage extends BasePage{
     public WebFormPage openWebformPage(){
         driver.findElement(By.linkText("Web form")).click();
         return new WebFormPage(driver);
+    }
+
+    public NavigationPage openNavigationPage(){
+        driver.findElement(By.linkText("Navigation")).click();
+        return new NavigationPage(driver);
     }
 
 }
