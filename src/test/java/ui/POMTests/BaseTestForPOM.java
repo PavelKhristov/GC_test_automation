@@ -7,12 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import ui.pages.HomePage;
 
 import java.time.Duration;
 
 public class BaseTestForPOM {
 
     WebDriver driver;
+    HomePage homePage;
     Actions actions;
     TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
 
@@ -28,6 +30,7 @@ public class BaseTestForPOM {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         actions = new Actions(driver);
+        homePage = new HomePage(driver);
     };
 
     @AfterEach

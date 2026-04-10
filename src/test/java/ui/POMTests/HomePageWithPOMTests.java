@@ -14,7 +14,7 @@ class HomePageWithPOMTests extends BaseTestForPOM {
     @DisplayName("Проверка домашней страницы")
     @Test
     void openHomePageTest (){
-        HomePage homePage = new HomePage(driver);
+        homePage = new HomePage(driver);
 
         String actualTitle = homePage.getMainTitle();
         assertEquals(homePage.getBaseUrl(), homePage.getCurrentUrl());

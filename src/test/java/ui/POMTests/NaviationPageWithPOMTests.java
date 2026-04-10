@@ -4,7 +4,6 @@ import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ui.pages.HomePage;
 import ui.pages.NavigationPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,14 +11,12 @@ import static ui.constants.CommonConstants.*;
 
 @Feature("POM")
 public class NaviationPageWithPOMTests extends BaseTestForPOM {
-    HomePage homePage;
 
     NavigationPage navigationPage;
 
     @DisplayName("Тест NavigationPage with POM")
     @Test
     void NavigationPageTest () throws InterruptedException {
-        homePage = new HomePage(driver);
         navigationPage = homePage.openNavigationPage();
 
         assertEquals(homePage.getBaseUrl() + NAVIGATION_PAGE_URL, navigationPage.getCurrentUrl());
