@@ -4,6 +4,7 @@ import configs.TestPropertiesConfig;
 import io.qameta.allure.Step;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public class BasePageForPF {
     WebDriver driver;
@@ -12,6 +13,7 @@ public class BasePageForPF {
 
     public BasePageForPF(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     //locators

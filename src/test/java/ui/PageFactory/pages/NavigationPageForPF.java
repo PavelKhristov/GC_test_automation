@@ -6,39 +6,51 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import ui.POM.pages.BasePage;
 import ui.POM.pages.HomePage;
 
 import java.util.List;
 
 public class NavigationPageForPF extends BasePageForPF {
+
     public NavigationPageForPF(WebDriver driver) {
         super(driver);
+//        PageFactory.initElements(driver, this);
     }
 
 
     //locators
-    By title = By.className("display-6");
+    @FindBy (className = "display-6")
+    private WebElement title;
 
-    By pageText = By.className("lead");
+    @FindBy (className = "lead")
+    private WebElement pageText;
 
-    By buttons = By.xpath("//li[contains(@class, 'page-item')]");
+    @FindBy (xpath = "//li[contains(@class, 'page-item')]")
+    private List<WebElement> buttons;
+
+    @FindBy (linkText = "Next")
+    private WebElement nextButton;
+
 
     //actions
 
 
     @Step("Get subpage title")
     public String getTitle() {
-        return driver.findElement(title).getText();
+        return title.getText();
     }
 
     @Step("Get page text")
     public String getPageText() {
-        return driver.findElement(pageText).getText();
+        return pageText.getText();
     }
+
     @Step("Get buttons")
     public List<WebElement> getButtons() {
-        return driver.findElements(buttons);
+        return buttons;
     }
 
     @Step("Get property=active")
@@ -52,6 +64,11 @@ public class NavigationPageForPF extends BasePageForPF {
     @Step("Click button")
     public void clickButton(String buttonName) {
         driver.findElement(By.linkText(buttonName)).click();
+    }
+
+    @Step("Click Next button")
+    public void clickNextButton() {
+        nextButton.click();
     }
 
 

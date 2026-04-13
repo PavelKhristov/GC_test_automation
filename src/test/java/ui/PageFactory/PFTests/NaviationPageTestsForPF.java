@@ -47,11 +47,13 @@ public class NaviationPageTestsForPF extends BaseTestForPF {
         Assertions.assertTrue(navigationPage.checkButtonIsActive("1"));
         navigationPage.checkButtonIsNotClickable("Previous");
 
-        navigationPage.clickButton("Next");
+        navigationPage.clickNextButton();
+        navigationPage.clickNextButton();
         Thread.sleep(timeoutFast);
-        assertEquals(SECOND_PAGE_TEXT, navigationPage.getPageText());
-        Assertions.assertTrue(navigationPage.checkButtonIsActive("2"));
+        assertEquals(THIRD_PAGE_TEXT, navigationPage.getPageText());
+        Assertions.assertTrue(navigationPage.checkButtonIsActive("3"));
 
+        navigationPage.clickButton("Previous");
         navigationPage.clickButton("Previous");
         Thread.sleep(timeoutFast);
         assertEquals(FIRST_PAGE_TEXT, navigationPage.getPageText());
