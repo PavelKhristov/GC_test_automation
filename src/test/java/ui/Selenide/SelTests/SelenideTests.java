@@ -1,5 +1,6 @@
 package ui.Selenide.SelTests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ui.Selenide.pages.HomePageForSelenide;
@@ -12,10 +13,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SelenideTests {
 
+    HomePageForSelenide homePage;
+
+    @BeforeEach
+    void init(){
+        homePage = new HomePageForSelenide();
+    };
+
     @DisplayName("Проверка домашней страницы")
     @Test
-    void openHomePageTest1 (){
-        HomePageForSelenide homePage = new HomePageForSelenide();
+    void openHomePageTest (){
         homePage.open();
 
         assertEquals(BASE_URL, homePage.getCurrentUrl());
@@ -25,7 +32,6 @@ public class SelenideTests {
     @DisplayName("Тест ткрытие WebFormPage")
     @Test
     void OpenWebFormTest () {
-        HomePageForSelenide homePage = new HomePageForSelenide();
         homePage.open();
         WebFormPageForSelenide webFormPage = homePage.openWebformPage();
 
@@ -37,7 +43,6 @@ public class SelenideTests {
     @DisplayName("Тест WebFormPage")
     @Test
     void readonlyTextTest () {
-        HomePageForSelenide homePage = new HomePageForSelenide();
         homePage.open();
         WebFormPageForSelenide webFormPage = homePage.openWebformPage();
 
