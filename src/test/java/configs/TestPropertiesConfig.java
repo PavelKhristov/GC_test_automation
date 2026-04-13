@@ -8,6 +8,10 @@ import org.aeonbits.owner.Config;
         "classpath:default.properties"
 })
 public interface TestPropertiesConfig extends Config {
+    @Key("browser")
+    @DefaultValue("chrome")
+    String browser();
+
     @Key("baseUrl")
     @DefaultValue(Constants.BASE_URL)
     String getBaseUrl();
@@ -29,4 +33,9 @@ public interface TestPropertiesConfig extends Config {
 
     @Key("timeoutSlow")
     Integer getTimeoutSlow();
+
+    @Key("remoteUrl")
+    String getRemoteUrl();
+
+
 }

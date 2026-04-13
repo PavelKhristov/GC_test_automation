@@ -32,3 +32,4 @@
 4. 4-PageFactory
    - Добавлены страницы и тесты в пакете PageFactory и переделаны под PF
    - Добавлены POM страницы и тесты для Selenide в пакет Selenide
+   - Добавлен Factory method в WebDriverFactory
