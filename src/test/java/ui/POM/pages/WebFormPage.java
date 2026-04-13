@@ -29,18 +29,22 @@ public class WebFormPage extends BasePage{
     private String getTitle() {
         return driver.findElement(title).getText();
     }
+
     @Step("Get page text")
     private String getPageText() {
         return driver.findElement(pageText).getText();
     }
+
     @Step("Submit page")
     public void submit() {
         submitButton.click();
     }
+
     @Step("Validate current URL")
     public void validateCurrentURL() {
         assertEquals(baseUrl + WEB_FORM_URL, getCurrentUrl());
     }
+
     @Step("Validate Title Name")
     public void validateTitleName(String titleName) {
         assertEquals(titleName, getTitle());
