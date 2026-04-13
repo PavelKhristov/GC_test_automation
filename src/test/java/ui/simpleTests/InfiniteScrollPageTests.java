@@ -1,16 +1,9 @@
-package ui;
+package ui.simpleTests;
 
-import configs.TestConfig;
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -19,28 +12,8 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
-public class InfiniteScrollPageTests {
-    WebDriver driver;
-    Actions actions;
-    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    String baseUrl = config.getBaseUrl();
-    Integer timeoutWeryFast = config.getTimeoutWeryFast();
-    Integer timeoutFast = config.getTimeoutFast();
-    Integer timeoutMedium = config.getTimeoutMedium();
-    Integer timeoutSlow = config.getTimeoutSlow();
+public class InfiniteScrollPageTests extends BaseTest {
 
-    @BeforeEach
-    void setup(){
-        driver = new ChromeDriver();
-        driver.get(baseUrl);
-        driver.manage().window().maximize();
-        actions = new Actions(driver);
-    };
-
-    @AfterEach
-    void tearDown (){
-        driver.quit();
-    };
 
     @DisplayName("Тест Infinite Scroll via js")
     @Test

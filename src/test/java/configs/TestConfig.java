@@ -65,6 +65,6 @@ public class TestConfig {
 
 
     //Пример запуска: gradle test -DbaseUrl=https://bonigarcia.dev/selenium-webdriver-java/
-    //gradle test -Denv="test" --tests "ui.ShadowDOMPageTests.testShadowDom"
+    //gradle test -Denv="test" --tests "ui.simpleTests.ShadowDOMPageTests.testShadowDom"
     //gradle test -Denv="test" -DbaseUrl=https://bonigarcia.dev/selenium-webdriver-java/
 }

@@ -1,43 +1,18 @@
-package ui;
+package ui.simpleTests;
 
-import configs.TestConfig;
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CookiesPageTests {
-    WebDriver driver;
-//    TestConfig config = new TestConfig();
-    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    String baseUrl = config.getBaseUrl();
-    Integer timeoutWeryFast = config.getTimeoutWeryFast();
-    Integer timeoutFast = config.getTimeoutFast();
-    Integer timeoutMedium = config.getTimeoutMedium();
-    Integer timeoutSlow = config.getTimeoutSlow();
+public class CookiesPageTests extends BaseTest {
 
-    @BeforeEach
-    void setup(){
-        driver = new ChromeDriver();
-        driver.get(baseUrl);
-        driver.manage().window().maximize();
-    };
-
-    @AfterEach
-    void tearDown (){
-        driver.quit();
-    };
 
     @DisplayName("Тест для cookies")
     @Test

@@ -1,37 +1,16 @@
-package ui;
+package ui.simpleTests;
 
-import configs.TestConfig;
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WebStoragePageTests {
-    WebDriver driver;
-    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    String baseUrl = config.getBaseUrl();
+public class WebStoragePageTests extends BaseTest {
 
-    @BeforeEach
-    void setup(){
-        driver = new ChromeDriver();
-        driver.get(baseUrl);
-        driver.manage().window().maximize();
-    };
-
-    @AfterEach
-    void tearDown (){
-        driver.quit();
-    };
     //html5 можно найти в 'org.seleniumhq.selenium:selenium-java:4.30.0'
     @DisplayName("Тест WebStorage")
     @Test

@@ -1,34 +1,17 @@
-package ui;
+package ui.simpleTests;
 
-import configs.TestConfig;
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ShadowDOMPageTests {
-    WebDriver driver;
-    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    String baseUrl = config.getBaseUrl();
+public class ShadowDOMPageTests extends BaseTest {
 
-    @BeforeEach
-    void setup(){
-        driver = new ChromeDriver();
-        driver.get(baseUrl);
-        driver.manage().window().maximize();
-    };
-
-    @AfterEach
-    void tearDown (){
-        driver.quit();
-    };
 
     @DisplayName("Тест ShadowDOM")
     @Test

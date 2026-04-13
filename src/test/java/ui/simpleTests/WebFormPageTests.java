@@ -1,11 +1,7 @@
-package ui;
+package ui.simpleTests;
 
-import configs.TestConfig;
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.Select;
@@ -23,33 +19,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class WebFormPageTests {
+public class WebFormPageTests extends BaseTest {
 
-    WebDriver driver;
-    Actions actions;
-//    TestConfig config = new TestConfig();
-    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    String baseUrl = config.getBaseUrl();
-    Integer timeoutWeryFast = config.getTimeoutWeryFast();
-    Integer timeoutFast = config.getTimeoutFast();
-    Integer timeoutMedium = config.getTimeoutMedium();
-    Integer timeoutSlow = config.getTimeoutSlow();
     private static final Path TXT_FILE_Path = Paths.get("src/test/resources/file.txt");
 
-
-
-    @BeforeEach
-    void setup(){
-        driver = new ChromeDriver();
-        driver.get(baseUrl);
-        driver.manage().window().maximize();
-        actions = new Actions(driver);
-    };
-
-    @AfterEach
-    void tearDown (){
-        driver.quit();
-    };
 
     @DisplayName("Проверка домашней страницы")
     @Test

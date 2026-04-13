@@ -1,23 +1,25 @@
-package ui;
+package ui.simpleTests;
 
-import configs.TestConfig;
 import configs.TestPropertiesConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.PageLoadStrategy.NONE;
 
 public class OtherTests {
+    //Оставил тест без BaseTest намеренно
     WebDriver driver;
     //Конфиг берется из configs.TestConfig
     TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());

@@ -1,37 +1,17 @@
-package ui;
+package ui.simpleTests;
 
-import configs.TestConfig;
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class HomePageTests {
-    WebDriver driver;
-    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    String baseUrl = config.getBaseUrl();
+class HomePageTests extends BaseTest {
 
-    @BeforeEach
-    void setup(){
-        driver = new ChromeDriver ();
-        driver.get(baseUrl);
-        driver.manage().window().maximize();
-    };
-
-    @AfterEach
-    void tearDown (){
-        driver.quit();
-    };
     @DisplayName("Проверка домашней страницы")
     @Test
     void openHomePageTest (){
@@ -130,7 +110,7 @@ public class HomePageTests {
 //        ниже пример xpath, в котором мы находим строку по сочитанию нескольких значений
 //        driver.findElement(By.xpath("//a[@class = 'btn btn-outline-primary mb-2' and @href = 'web-form.html' and text() = 'Web form']")).click();
 
-//        ниже пример более сложного xpath, мы находим h5 с нужным текстом,
+//        в тестах примеры более сложного xpath, мы находим h5 с нужным текстом,
 //        поднимаемся на уровень вверх и ищем a который имеет ссылку, содержащую определенный текст
         driver.findElement(By.xpath(link)).click();
         WebElement actualTitle = driver.findElement(By.className("display-6"));
