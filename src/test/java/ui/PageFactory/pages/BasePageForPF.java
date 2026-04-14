@@ -1,5 +1,6 @@
 package ui.PageFactory.pages;
 
+import components.HeaderComponent;
 import configs.TestPropertiesConfig;
 import io.qameta.allure.Step;
 import org.aeonbits.owner.ConfigFactory;
@@ -13,10 +14,12 @@ public class BasePageForPF {
 
     public BasePageForPF(WebDriver driver) {
         this.driver = driver;
+        header = new HeaderComponent(driver);
         PageFactory.initElements(driver, this);
     }
 
     //locators
+    HeaderComponent header;
 
     //actions
     @Step("Get current url")
@@ -31,4 +34,6 @@ public class BasePageForPF {
     public String getBaseUrl() {
         return baseUrl;
     }
+
+    public HeaderComponent getHeader(){return header;}
 }

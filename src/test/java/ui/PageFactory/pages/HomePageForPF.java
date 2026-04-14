@@ -3,9 +3,6 @@ package ui.PageFactory.pages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ui.POM.pages.BasePage;
-import ui.POM.pages.NavigationPage;
-import ui.POM.pages.WebFormPage;
 
 public class HomePageForPF extends BasePageForPF {
 

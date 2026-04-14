@@ -17,11 +17,18 @@ class HomePageTestsForPF extends BaseTestForPF {
     @DisplayName("Проверка домашней страницы")
     @Test
     void openHomePageTest (){
-        homePage = new HomePageForPF(driver);
-
         String actualTitle = homePage.getMainTitle();
         assertEquals(homePage.getBaseUrl(), homePage.getCurrentUrl());
         assertEquals("Hands-On Selenium WebDriver with Java", actualTitle);
+    };
+
+    @DisplayName("Проверка header")
+    @Test
+    void headerTest (){
+        String headerSubtitleText = homePage.getHeader().getSubtitleText();
+        String headerText = homePage.getHeader().getTitleText();
+        assertEquals("Practice site", headerSubtitleText);
+        assertEquals("Hands-On Selenium WebDriver with Java", headerText);
     };
 
 }
