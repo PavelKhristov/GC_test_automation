@@ -33,4 +33,5 @@
    - Добавлены страницы и тесты в пакете PageFactory и переделаны под PF
    - Добавлены POM страницы и тесты для Selenide в пакет Selenide
    - Добавлен Factory method в WebDriverFactory
-   - Добавлен Lombok
+   - Добавлен компонент HeaderComponent, его инициализация в BasePageForPF, тест с ним в HomePageTestsForPF
+   - Добавлен Lombok и FluentAPI
