@@ -3,9 +3,9 @@ package builder;
 import lombok.Builder;
 import lombok.Data;
 
-@Builder
-@Data
 
+@Data
+@Builder(toBuilder = true)
 public class User {
     private String name;
     private int age;

@@ -1,13 +1,11 @@
 package builder;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
-@AllArgsConstructor
+@Builder(toBuilder = true)
 public class Address {
     private String street;
     private String city;
