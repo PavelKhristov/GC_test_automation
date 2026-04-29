@@ -1,23 +1,20 @@
-package ui.simpleTests;
+package ui.PageFactory.PFTests;
 
 import configs.TestPropertiesConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import ui.PageFactory.pages.HomePageForPF;
 
-import static patterns.WebDriverFactory.createWebDriver;
-
-
-public class BaseTest {
+public class BaseTestForPF {
 
     WebDriver driver;
+    HomePageForPF homePage;
     Actions actions;
-
-    //Проперти (конфиги)
     TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    String baseUrl = config.getBaseUrl();
 
     //Таймауты
     Integer timeoutWeryFast = config.getTimeoutWeryFast();
@@ -25,13 +22,13 @@ public class BaseTest {
     Integer timeoutMedium = config.getTimeoutMedium();
     Integer timeoutSlow = config.getTimeoutSlow();
 
+
     @BeforeEach
     void setup(){
-//        driver = new ChromeDriver();
-        driver = createWebDriver(config.browser());
-        driver.get(baseUrl);
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         actions = new Actions(driver);
+        homePage = new HomePageForPF(driver);
     };
 
     @AfterEach

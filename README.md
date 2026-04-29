@@ -29,3 +29,9 @@
    - добавлен BaseTest для простых тестов
    - добавлены POM: в pages страницы, а в POMTests тесты
    - добавлен алюр
+4. 4-PageFactory
+   - Добавлены страницы и тесты в пакете PageFactory и переделаны под PF
+   - Добавлены POM страницы и тесты для Selenide в пакет Selenide
+   - Добавлен Factory method в WebDriverFactory
+   - Добавлен компонент HeaderComponent, его инициализация в BasePageForPF, тест с ним в HomePageTestsForPF
+   - Добавлен Lombok и FluentAPI
