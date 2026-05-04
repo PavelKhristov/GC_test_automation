@@ -35,3 +35,6 @@
    - Добавлен Factory method в WebDriverFactory
    - Добавлен компонент HeaderComponent, его инициализация в BasePageForPF, тест с ним в HomePageTestsForPF
    - Добавлен Lombok и FluentAPI
+5. 5-Download_files
+   - Добавлен тест DownloadFilesPageTest для проверки скачивания файлов и steps/AllureSteps с методами для download файла/сохранения скринов
+   - Добавлен extensions/AllureExtension и тест ExtensionTests для него. (структура позволяет добавлять скриншоты при падении теста)
